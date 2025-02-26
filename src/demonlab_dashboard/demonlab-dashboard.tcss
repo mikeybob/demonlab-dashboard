@@ -1,0 +1,93 @@
+Screen {
+    layout: grid;
+    background: black;
+    grid-gutter: 1;
+    grid-size: 6 4;
+}
+
+.box {
+    height: 1fr;
+    width: 1fr;
+    background: gray 10%;
+    border: tall #003049;
+    content-align: left top;
+    margin: 1 1 0 0;
+    padding: 0;
+}
+
+#opts {
+    column-span: 1;
+    background: cyan 10%;
+    height: 12;
+    border: round darkgray;
+    content-align: center top;
+}
+
+#gsh {
+    column-span: 2;
+    background: darkgoldenrod 50%;
+    height: 12;
+    border: round darkgray;
+    content-align: center top;
+}
+
+#alrt {
+    column-span: 2;
+    background: firebrick 50%;
+    height: 1fr;
+    border: round darkgray;
+    content-align: center top;
+}
+
+#msc {
+    column-span: 2;
+    background: midnightblue 50%;
+    height: 12;
+    border: round darkgray;
+    content-align: center top;
+}
+
+Header {
+  dock: top;
+  height: 3;
+  content-align: center middle;
+  border: round darkgray;
+  background: #242f44;
+  color: white;
+}
+
+Footer {
+  dock: bottom;
+  height: 3;
+  content-align: center middle;
+  border: round darkgray;
+  background: #242f44;
+  color: white;
+}
+
+Horizontal {
+   layout: grid;
+   grid-size: 9;
+   grid-gutter: 0;
+   grid-rows: 1fr;
+   grid-columns: 1fr;
+   column-span: 7;
+   width: 1fr;
+   height: 1fr;
+   background: black;
+   border: solid teal;
+   content-align: center middle;
+   margin: 1 1 1 1;
+
+
+
+}
+
+Button {
+  margin: 0 1;
+  width: 30;
+  border: outer darkslategray 70%;
+
+
+
+}
