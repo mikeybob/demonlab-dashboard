@@ -1,4 +1,3 @@
-from clock import ClockWidget  # Import the clock widget
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalScroll, VerticalScroll
@@ -13,6 +12,8 @@ from textual.widgets import (
     Placeholder,
     Static,
 )
+
+from clock import ClockWidget  # Import the clock widget
 
 # UserPanel Glyphs
 tz = "[red] GMT[/red]"
