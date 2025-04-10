@@ -8,17 +8,23 @@ Screen {
 .box {
     height: 1fr;
     width: 1fr;
-    background: gray 10%;
-    border: tall #003049;
+    background: black;
+    border: round #003049;
+    border-title-background: white 5%;
+    border-title-style: underline;
     content-align: left top;
     margin: 1 1 0 0;
-    padding: 0;
+    padding: 1;
+}
+
+.empty_box {
+    border: dashed white  5%;
 }
 
 #opts {
     column-span: 1;
     background: cyan 10%;
-    height: 12;
+    height: 1fr;
     border: round darkgray;
     content-align: center top;
 }
@@ -26,14 +32,14 @@ Screen {
 #gsh {
     column-span: 2;
     background: darkgoldenrod 50%;
-    height: 12;
+    height: 1fr;
     border: round darkgray;
     content-align: center top;
 }
 
 #alrt {
     column-span: 2;
-    background: firebrick 50%;
+    background: firebrick 30%;
     height: 1fr;
     border: round darkgray;
     content-align: center top;
@@ -41,18 +47,19 @@ Screen {
 
 #msc {
     column-span: 2;
-    background: midnightblue 50%;
-    height: 12;
+    background: midnightblue 90%;
+    height: 1fr;
     border: round darkgray;
     content-align: center top;
 }
 
 Header {
   dock: top;
-  height: 3;
+  height: 5;
   content-align: center middle;
-  border: round darkgray;
-  background: #242f44;
+  border: tall darkgray;
+  # background: #242f44;
+  background: black;
   color: white;
 }
 
@@ -60,8 +67,8 @@ Footer {
   dock: bottom;
   height: 3;
   content-align: center middle;
-  border: round darkgray;
-  background: #242f44;
+  border: tall darkgray;
+  background: black;
   color: white;
 }
 
@@ -75,18 +82,20 @@ Horizontal {
    width: 1fr;
    height: 1fr;
    background: black;
-   border: solid teal;
+   border: wide silver 50%;
    content-align: center middle;
-   margin: 1 1 1 1;
+   margin: 0 1 1 1;
 
 
 
 }
 
 Button {
-  margin: 0 1;
+  color: auto;
+  margin: 1 1;
   width: 30;
-  border: outer darkslategray 70%;
+  border: outer blue 50%;
+  padding: 0;
 
 
 
