@@ -1,3 +1,5 @@
+
+
 Screen {
     layout: grid;
     background: black;
@@ -18,7 +20,7 @@ Screen {
 }
 
 .empty_box {
-    border: dashed white  5%;
+    border: dashed white 5%;
 }
 
 #opts {
@@ -54,49 +56,64 @@ Screen {
 }
 
 Header {
-  dock: top;
-  height: 5;
-  content-align: center middle;
-  border: tall darkgray;
-  # background: #242f44;
-  background: black;
-  color: white;
+    dock: top;
+    height: 5;
+    content-align: center middle;
+    border: tall darkgray;
+    background: black;
+    color: white;
 }
 
 Footer {
-  dock: bottom;
-  height: 3;
-  content-align: center middle;
-  border: tall darkgray;
-  background: black;
-  color: white;
+    dock: bottom;
+    height: 3;
+    content-align: center middle;
+    border: tall darkgray;
+    background: black;
+    color: white;
 }
 
 Horizontal {
-   layout: grid;
-   grid-size: 9;
-   grid-gutter: 0;
-   grid-rows: 1fr;
-   grid-columns: 1fr;
-   column-span: 7;
-   width: 1fr;
-   height: 1fr;
-   background: black;
-   border: wide silver 50%;
-   content-align: center middle;
-   margin: 0 1 1 1;
-
-
-
+    layout: grid;
+    grid-size: 9;
+    grid-gutter: 0;
+    grid-rows: 1fr;
+    grid-columns: 1fr;
+    column-span: 7;
+    width: 1fr;
+    height: 1fr;
+    background: black;
+    border: wide silver 50%;
+    content-align: center middle;
+    margin: 0 1 1 1;
 }
 
 Button {
-  color: auto;
-  margin: 1 1;
-  width: 30;
-  border: outer blue 50%;
-  padding: 0;
+    color: auto;
+    margin: 1 1;
+    width: 30;
+    border: outer blue 50%;
+    padding: 0;
+}
 
+.button {
+    margin: 0 1;
+}
 
+.button:hover {
+    text-style: bold;
+}
 
+#output {
+    border: heavy #ff00ff;
+    column-span: 4;
+    height: 10;
+    padding: 1;
+    background: #2a2a2a;
+}
+
+.title {
+    text-style: bold;
+    color: #ff00ff;
+    column-span: 4;
 }

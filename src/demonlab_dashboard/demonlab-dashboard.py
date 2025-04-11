@@ -18,6 +18,7 @@ import logging
 import psycopg2
 from psycopg2 import extensions
 from datetime import datetime, timezone
+from fades import FadingScreen
 
 # Configure logging
 logging.basicConfig(
@@ -47,8 +48,8 @@ class SystemHealth(Screen):
 
 class GridLayoutTest(App):
     CSS_PATH = "demonlab-dashboard.tcss"
-    TITLE = "Admin Dashboard"
-    SUB_TITLE = "Demonlab"
+    TITLE = "Demonlab Dashboard"
+    SUB_TITLE = "Synapse and Sysadmin"
 
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
