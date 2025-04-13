@@ -1,7 +1,9 @@
 # startup.py
+import asyncio
+
 from textual.screen import Screen
 from textual.widgets import Static
-import asyncio
+
 
 class SplashScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Dismiss")]

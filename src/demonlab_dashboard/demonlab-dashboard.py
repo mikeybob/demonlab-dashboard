@@ -1,3 +1,12 @@
+import asyncio
+import json
+import logging
+from datetime import datetime, timezone
+
+import psycopg2
+from about import AboutScreen
+from psycopg2 import extensions
+from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalScroll, VerticalScroll
@@ -12,14 +21,6 @@ from textual.widgets import (
     Placeholder,
     Static,
 )
-import asyncio
-import json
-import logging
-import psycopg2
-from psycopg2 import extensions
-from datetime import datetime, timezone
-from startup import SplashScreen
-from about import AboutScreen
 
 # Configure logging
 logging.basicConfig(

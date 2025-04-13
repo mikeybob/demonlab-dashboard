@@ -1,9 +1,10 @@
 # demonlab-dashboard-prime.py
+from about import AboutScreen
+from startup import SplashScreen
 from textual.app import App
 from textual.binding import Binding
 from textual.widgets import Footer, Header
-from startup import SplashScreen
-from about import AboutScreen
+
 
 class GridLayoutTest(App):
     CSS_PATH = "demonlab-dashboard.tcss"

@@ -1,6 +1,8 @@
+import asyncio
+
 from textual.screen import Screen
 from textual.widgets import Static
-import asyncio
+
 
 class FadingScreen(Screen):
 
