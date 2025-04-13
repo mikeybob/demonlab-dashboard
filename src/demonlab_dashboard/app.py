@@ -5,6 +5,7 @@ from textual.widgets import Button, Static
 
 # Import other necessary modules
 
+
 class MainApp(App):
     def compose(self) -> ComposeResult:
         # Include components from other modules
@@ -17,6 +18,7 @@ class MainApp(App):
         await Database.connect()
         # Schedule periodic tasks if necessary
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = MainApp()
     app.run()

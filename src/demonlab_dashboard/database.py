@@ -8,6 +8,7 @@ DB_CONFIG = {
     "database": "synapse",
 }
 
+
 class Database:
     _pool = None
 

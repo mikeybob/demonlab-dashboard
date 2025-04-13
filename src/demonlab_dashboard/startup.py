@@ -11,9 +11,11 @@ class SplashScreen(Screen):
     def compose(self):
         self.message = Static(
             "Welcome to the DemonLab Dashboard\nSystem Initializing...",
-            id="splash-text"
+            id="splash-text",
         )
-        self.message.styles.color = "#000000"  # black/invisible text on black background initially
+        self.message.styles.color = (
+            "#000000"  # black/invisible text on black background initially
+        )
         yield self.message
 
     async def on_mount(self):

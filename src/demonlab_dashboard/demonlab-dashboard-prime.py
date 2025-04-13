@@ -13,14 +13,26 @@ class GridLayoutTest(App):
 
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
-        Binding(key="question_mark", action="push_screen('about')", description="Show about screen", key_display="?"),
-        Binding(key="s", action="push_screen('splash')", description="Show startup screen", key_display="s"),
+        Binding(
+            key="question_mark",
+            action="push_screen('about')",
+            description="Show about screen",
+            key_display="?",
+        ),
+        Binding(
+            key="s",
+            action="push_screen('splash')",
+            description="Show startup screen",
+            key_display="s",
+        ),
     ]
 
     async def on_mount(self):
         # Show splash screen initially
         await self.push_screen(SplashScreen())
-        self.set_timer(3, self.switch_to_about)  # Automatically switch to about screen after 3 seconds
+        self.set_timer(
+            3, self.switch_to_about
+        )  # Automatically switch to about screen after 3 seconds
 
     def switch_to_about(self):
         # Transition to the AboutScreen after splash
@@ -30,6 +42,7 @@ class GridLayoutTest(App):
         yield Footer()
         yield Header()
         # Add other main screen components here
+
 
 if __name__ == "__main__":
     app = GridLayoutTest()
