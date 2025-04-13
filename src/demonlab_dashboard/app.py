@@ -5,7 +5,7 @@ from system_health import SystemHealthPanel
 # Import other necessary modules
 
 class MainApp(App):
-    def compose(self) -&gt; ComposeResult:
+    def compose(self) -> ComposeResult:
         # Include components from other modules
         yield SystemHealthPanel()
         # Add more panels or widgets as needed

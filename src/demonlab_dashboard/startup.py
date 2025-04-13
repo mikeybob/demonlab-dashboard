@@ -1,19 +1,25 @@
+# startup.py
 from textual.screen import Screen
 from textual.widgets import Static
 import asyncio
 
 class SplashScreen(Screen):
+    BINDINGS = [("escape", "app.pop_screen", "Dismiss")]
+
     def compose(self):
-        yield Static(
-            "Welcome to the DemonLab Dashboard\\nSystem Initializing...",
+        self.message = Static(
+            "Welcome to the DemonLab Dashboard\nSystem Initializing...",
             id="splash-text"
         )
+        self.message.styles.color = "#000000"  # black/invisible text on black background initially
+        yield self.message
 
     async def on_mount(self):
-        await self.animate_fade_in()
+        await self.fade_in_text()
 
-    async def animate_fade_in(self):
-        self.set_opacity(0)
-        while self.get_opacity() &lt; 1:
-            self.set_opacity(self.get_opacity() + 0.05)
-            await asyncio.sleep(0.05)
+    async def fade_in_text(self):
+        # Fade-in steps from dark grey (#222222) to light (#ffffff)
+        color_steps = ["#222222", "#555555", "#888888", "#BBBBBB", "#FFFFFF"]
+        for shade in color_steps:
+            self.message.styles.color = shade
+            await asyncio.sleep(0.1)
