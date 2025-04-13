@@ -1,3 +1,10 @@
+import asyncio
+import json
+import logging
+from datetime import datetime, timezone
+
+import psycopg2
+from psycopg2 import extensions
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalScroll, VerticalScroll
@@ -12,12 +19,6 @@ from textual.widgets import (
     Placeholder,
     Static,
 )
-import asyncio
-import json
-import logging
-import psycopg2
-from psycopg2 import extensions
-from datetime import datetime, timezone
 
 # Configure logging
 logging.basicConfig(
@@ -27,23 +28,30 @@ logging.basicConfig(
     filemode="a",
 )
 
+
 class SplashScreen(Screen):
     pass
+
 
 class Settings(Screen):
     pass
 
+
 class Anomoly(Screen):
     pass
+
 
 class Alerts(Screen):
     pass
 
+
 class Misc(Screen):
     pass
 
+
 class SystemHealth(Screen):
     pass
+
 
 class GridLayoutTest(App):
     CSS_PATH = "demonlab-dashboard.tcss"
@@ -52,7 +60,12 @@ class GridLayoutTest(App):
 
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
-        Binding(key="question_mark", action="help", description="Show help screen", key_display="?"),
+        Binding(
+            key="question_mark",
+            action="help",
+            description="Show help screen",
+            key_display="?",
+        ),
         Binding(key="b", action="null", description="Beep"),
         Binding(key="p", action="null2", description="Plop"),
     ]
@@ -94,8 +107,11 @@ class GridLayoutTest(App):
     def fetch_tracked_users(self) -> list[str]:
         """Fetch tracked users from the database."""
         conn = psycopg2.connect(
-            dbname="synapse", user="synapse_user", password="synapse",
-            host="10.99.10.128", port=5432
+            dbname="synapse",
+            user="synapse_user",
+            password="synapse",
+            host="10.99.10.128",
+            port=5432,
         )
         cursor = conn.cursor()
         cursor.execute("SELECT user_id FROM synapx.scorecard_member_list;")
@@ -107,8 +123,11 @@ class GridLayoutTest(App):
     def refresh_materialized_view(self):
         """Refresh the materialized view for user last active data."""
         conn = psycopg2.connect(
-            dbname="synapse", user="synapse_user", password="synapse",
-            host="10.99.10.128", port=5432
+            dbname="synapse",
+            user="synapse_user",
+            password="synapse",
+            host="10.99.10.128",
+            port=5432,
         )
         cursor = conn.cursor()
         cursor.execute("REFRESH MATERIALIZED VIEW synapx.user_last_active;")
@@ -120,8 +139,11 @@ class GridLayoutTest(App):
         """Load user activity data from the refreshed view."""
         self.tracked_users = self.fetch_tracked_users()
         conn = psycopg2.connect(
-            dbname="synapse", user="synapse_user", password="synapse",
-            host="10.99.10.128", port=5432
+            dbname="synapse",
+            user="synapse_user",
+            password="synapse",
+            host="10.99.10.128",
+            port=5432,
         )
         cursor = conn.cursor()
         cursor.execute(
@@ -133,8 +155,9 @@ class GridLayoutTest(App):
         conn.close()
         for user_id, last_active_ts, display_name, avatar_url, usrtz in rows:
             if last_active_ts and last_active_ts > 0:
-                last_active_str = datetime.fromtimestamp(last_active_ts/1000, timezone.utc) \
-                                        .strftime("%Y-%m-%dT%H:%M")
+                last_active_str = datetime.fromtimestamp(
+                    last_active_ts / 1000, timezone.utc
+                ).strftime("%Y-%m-%dT%H:%M")
             else:
                 last_active_str = "N/A"
             self.user_data[user_id] = {
@@ -182,19 +205,24 @@ class GridLayoutTest(App):
         instance = data.get("instance_name", "Unknown")
         status_msg = data.get("status_msg", "N/A")
         last_active = (
-            datetime.fromtimestamp(last_ts/1000, timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
-            if last_ts and last_ts > 0 else "N/A"
+            datetime.fromtimestamp(last_ts / 1000, timezone.utc).strftime(
+                "%Y-%m-%dT%H:%M:%S"
+            )
+            if last_ts and last_ts > 0
+            else "N/A"
         )
         if user_id in self.tracked_users:
-            self.user_data[user_id].update({
-                "state": state,
-                "last_active": last_active,
-                "last_active_ts": last_ts or 0,
-                "currently_active": currently_active,
-                "instance": instance,
-                "status_msg": status_msg,
-                "glyph_status": "🟢" if currently_active else "🔴",
-            })
+            self.user_data[user_id].update(
+                {
+                    "state": state,
+                    "last_active": last_active,
+                    "last_active_ts": last_ts or 0,
+                    "currently_active": currently_active,
+                    "instance": instance,
+                    "status_msg": status_msg,
+                    "glyph_status": "🟢" if currently_active else "🔴",
+                }
+            )
             logging.info(f"Updated: {user_id} -> {self.user_data[user_id]}")
         else:
             logging.info(f"Skipping untracked user: {user_id}")
@@ -207,8 +235,11 @@ class GridLayoutTest(App):
             while True:
                 try:
                     conn = psycopg2.connect(
-                        dbname="synapse", user="synapse_user", password="synapse",
-                        host="10.99.10.128", port=5432
+                        dbname="synapse",
+                        user="synapse_user",
+                        password="synapse",
+                        host="10.99.10.128",
+                        port=5432,
                     )
                     conn.set_isolation_level(extensions.ISOLATION_LEVEL_AUTOCOMMIT)
                     cursor = conn.cursor()
@@ -228,7 +259,9 @@ class GridLayoutTest(App):
                         # Refresh the dashboard panels with new data
                         self.refresh_user_panels()
                 except psycopg2.OperationalError as e:
-                    logging.error(f"Database error in listen loop: {e}. Reconnecting...")
+                    logging.error(
+                        f"Database error in listen loop: {e}. Reconnecting..."
+                    )
                     # Loop will retry connection
                 except Exception as e:
                     logging.error(f"Unexpected error in listener: {e}", exc_info=True)
@@ -257,7 +290,9 @@ class GridLayoutTest(App):
             info = self.user_data.get(user_id, {})
             # Update icons and colors based on current state
             state_icon = self.state_icons.get(info.get("state", "unknown"), "⚪")
-            active_icon = " " if not info.get("currently_active") else "[#d7af00] [/#d7af00]"
+            active_icon = (
+                " " if not info.get("currently_active") else "[#d7af00] [/#d7af00]"
+            )
             fade_color = "#444444"
             lgap_str = "N/A"
             if info.get("last_active") not in (None, "N/A"):
@@ -295,7 +330,9 @@ class GridLayoutTest(App):
                 f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]"
             )
             widget.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
-            widget.border_subtitle = f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
+            widget.border_subtitle = (
+                f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
+            )
             widget.update(new_content)
             widget.border = ("heavy", fade_color)
 
@@ -309,7 +346,9 @@ class GridLayoutTest(App):
                 user_id = self.displayed_users[index]
                 info = self.user_data[user_id]
                 state_icon = self.state_icons.get(info["state"], "⚪")
-                active_icon = " " if not info["currently_active"] else "[#d7af00] [/#d7af00]"
+                active_icon = (
+                    " " if not info["currently_active"] else "[#d7af00] [/#d7af00]"
+                )
                 fade_color = "#444444"
                 lgap_str = "N/A"
                 if info["last_active"] != "N/A":
@@ -327,7 +366,9 @@ class GridLayoutTest(App):
                             fade_color = "#888888"
                         else:
                             fade_color = "#444444"
-                        lgap_str = f"{gap.days}d {gap.seconds//3600}h {gap.seconds//60%60}m"
+                        lgap_str = (
+                            f"{gap.days}d {gap.seconds//3600}h {gap.seconds//60%60}m"
+                        )
                     except Exception as e:
                         logging.error(f"Error calculating gap for {user_id}: {e}")
                         lgap_str = "Calc Error"
@@ -347,8 +388,12 @@ class GridLayoutTest(App):
                     f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]"
                 )
                 user_label = Label(content, id=f"User{index+1}", classes="box")
-                user_label.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
-                user_label.border_subtitle = f"{active_icon}[grey35]{info['display_name']}[/grey35]"
+                user_label.border_title = (
+                    f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
+                )
+                user_label.border_subtitle = (
+                    f"{active_icon}[grey35]{info['display_name']}[/grey35]"
+                )
                 user_label.border = ("heavy", fade_color)
                 self.user_widgets[user_id] = user_label
                 yield user_label
@@ -392,6 +437,7 @@ class GridLayoutTest(App):
     def action_null2(self) -> None:
         """No-op action for 'p' key (plop)."""
         return
+
 
 if __name__ == "__main__":
     app = GridLayoutTest()
