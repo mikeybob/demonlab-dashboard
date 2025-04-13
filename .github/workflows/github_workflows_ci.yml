@@ -16,14 +16,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install pre-commit
       - name: Run pre-commit hooks
-        run: pre-commit run --all-files
+        id: run_pre_commit
+        run: |
+          pre-commit run --all-files || exit_code=$?
+          echo "::set-output name=exit_code::$exit_code"
       - name: Commit and push changes
+        if: steps.run_pre_commit.outputs.exit_code == '1'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          if [ -n "$(git status --porcelain)" ]; then
-            git add .
-            git commit -m "Apply formatting fixes via pre-commit"
-            git push
-          else
-            echo "No changes to commit"
+          git add .
+          git commit -m "Apply formatting fixes via pre-commit"
+          git push
