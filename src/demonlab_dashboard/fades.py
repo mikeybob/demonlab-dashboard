@@ -5,7 +5,6 @@ from textual.widgets import Static
 
 
 class FadingScreen(Screen):
-
     def compose(self):
         self.static = Static("Welcome to the Fading Screen")
         self.opacity = 0.0  # Start invisible
