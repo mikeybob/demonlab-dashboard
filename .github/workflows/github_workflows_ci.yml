@@ -17,7 +17,7 @@ jobs:
           pip install pre-commit
       - name: Run pre-commit hooks
         run: pre-commit run --all-files
-      - name: Check for changes
+      - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
