@@ -1,12 +1,13 @@
 # Demonlab Dashboard  - Still very under development
 
-![GitHub License](https://img.shields.io/github/license/mikeybob/demonlab-dashboard) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/) [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch) 
+### Stats: 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/github_workflows_ci.yml?style=for-the-badge&color=darkgreen) ![GitHub License](https://img.shields.io/github/license/mikeybob/demonlab-dashboard?style=for-the-badge&color=royalblue)
 
-
-
-[![CI](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/github_workflows_ci.yml/badge.svg)](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/github_workflows_ci.yml)
-
-
+### Build Tools:
+![Static Badge](https://img.shields.io/badge/black-black?style=for-the-badge&label=code-style&color=black) ![Static Badge](https://img.shields.io/badge/isort-black?style=for-the-badge&label=imports&labelColor=orangered&color=darkblue) ![Static Badge](https://img.shields.io/badge/Hatch-blue?style=for-the-badge&logo=egghead&labelColor=black&color=royalblue)
+----
+### Misc:
+![Matrix](https://img.shields.io/matrix/gitdev%3Ademonlab.net?server_fqdn=demonlab.net&style=for-the-badge&logo=matrix&logoColor=black&logoSize=auto&label=demonlab&labelColor=red)
 
 -----
 
