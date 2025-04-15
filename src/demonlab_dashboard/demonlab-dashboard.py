@@ -442,7 +442,7 @@ class GridLayoutTest(App):
             gsh_widget = self.query_one("#gsh", Static)
             gsh_widget.update(
                 f"[b]General System Health[/b]\n"
-                yield Label("double")
+                Label("double")
                 f"{label}: {next_datapoint}"
             )
 
