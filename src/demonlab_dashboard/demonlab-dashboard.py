@@ -20,6 +20,7 @@ from textual.widgets import (
     LoadingIndicator,
     Placeholder,
     Static,
+    Rule
 )
 
 # Configure logging
