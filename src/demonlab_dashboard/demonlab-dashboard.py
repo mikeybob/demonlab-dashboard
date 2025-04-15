@@ -441,7 +441,7 @@ class GridLayoutTest(App):
 
             gsh_widget = self.query_one("#gsh", Static)
             gsh_widget.update(
-                f"[b]General System Health[/b]\n{label}: {next_datapoint}"
+                f"[b]General System Health[/b]\n\n{label}: {next_datapoint}"
             )
 
             await asyncio.sleep(60)
