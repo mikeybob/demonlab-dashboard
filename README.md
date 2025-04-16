@@ -1,7 +1,7 @@
 # Demonlab Dashboard  - Still very under development
 
 ### Stats: 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/github_workflows_ci.yml?style=for-the-badge&color=darkgreen) ![GitHub License](https://img.shields.io/github/license/mikeybob/demonlab-dashboard?style=for-the-badge&color=royalblue) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mikeybob/demonlab-dashboard?style=for-the-badge&color=firebrick) ![GitHub top language](https://img.shields.io/github/languages/top/mikeybob/demonlab-dashboard?style=for-the-badge&logo=python&logoColor=darkblue&logoSize=auto&color=darkblue)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/github_workflows_ci.yml?style=for-the-badge&color=darkgreen) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mikeybob/demonlab-dashboard?style=for-the-badge&color=firebrick) ![GitHub top language](https://img.shields.io/github/languages/top/mikeybob/demonlab-dashboard?style=for-the-badge&logo=python&logoColor=darkblue&logoSize=auto&color=darkblue)
 
 
 
@@ -26,5 +26,6 @@ pip install demonlab-dashboard
 ```
 
 ## License
+![GitHub License](https://img.shields.io/github/license/mikeybob/demonlab-dashboard?style=for-the-badge&color=royalblue)
 
 `demonlab-dashboard` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
