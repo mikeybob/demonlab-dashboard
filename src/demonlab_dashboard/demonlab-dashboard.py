@@ -19,6 +19,7 @@ from textual.widgets import (
     Label,
     LoadingIndicator,
     Placeholder,
+    Rule,
     Static,
 )
 
