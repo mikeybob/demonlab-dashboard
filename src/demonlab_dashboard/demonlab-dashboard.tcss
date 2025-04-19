@@ -20,30 +20,32 @@ Screen {
 }
 
 .empty_box {
-    border: dashed white 5%;
+    border: dashed white 10%;
 }
 
 #opts {
     column-span: 1;
     background: cyan 10%;
     height: 1fr;
-    border: round darkgray;
-    content-align: center top;
+    border: tall darkgray;
+    content-align: left top;
 }
 
 #gsh {
     column-span: 2;
     background: darkgoldenrod 50%;
     height: 1fr;
-    border: round darkgray;
+    border: tall white;
     content-align: center top;
+    border-title-background: white 5%;
+    border-title-style: underline;
 }
 
 #alrt {
     column-span: 2;
     background: firebrick 30%;
     height: 1fr;
-    border: round darkgray;
+    border: tall white;
     content-align: center top;
 }
 
@@ -51,7 +53,7 @@ Screen {
     column-span: 2;
     background: midnightblue 90%;
     height: 1fr;
-    border: round darkgray;
+    border: tall white;
     content-align: center top;
 }
 
@@ -59,8 +61,8 @@ Header {
     dock: top;
     height: 5;
     content-align: center middle;
-    border: tall darkgray;
-    background: black;
+    border: tall white;
+    background: royalblue 50%;
     color: white;
 }
 
@@ -75,24 +77,24 @@ Footer {
 
 Horizontal {
     layout: grid;
-    grid-size: 9;
+    grid-size: 4;
     grid-gutter: 0;
     grid-rows: 1fr;
     grid-columns: 1fr;
-    column-span: 7;
+    column-span: 2;
     width: 1fr;
     height: 1fr;
     background: black;
-    border: wide silver 50%;
+    border: heavy pink;
     content-align: center middle;
-    margin: 0 1 1 1;
+    margin: 0;
 }
 
 Button {
     color: auto;
     margin: 1 1;
-    width: 30;
-    border: outer blue 50%;
+    width: 20;
+    border: outer blue;
     padding: 0;
 }
 

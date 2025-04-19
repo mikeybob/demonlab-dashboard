@@ -293,14 +293,14 @@ class GridLayoutTest(App):
                     gap = datetime.now(timezone.utc) - last_active_time
                     minutes_idle = gap.total_seconds() / 60
                     if minutes_idle < 5:
-                        fade_color = "#d7af00"
+                        fade_color = "lime"
                     elif minutes_idle < 30:
                         fade_color = "#ffd700"
                     elif minutes_idle < 120:
                         fade_color = "#888888"
                     else:
                         fade_color = "#444444"
-                    lgap_str = f"{gap.days}d {gap.seconds//3600}h {gap.seconds//60%60}m"
+                    lgap_str = f"[firebrick]{gap.days}d[/] [royalblue]{gap.seconds//3600}h[/] [orangered]{gap.seconds//60%60}m[/]"
                 except Exception as e:
                     logging.error(f"Error computing gap for {user_id}: {e}")
                     fade_color = "#444444"
@@ -311,7 +311,8 @@ class GridLayoutTest(App):
             new_content = (
                 f"[#0A9396] : {last_active_label}[/#0A9396]\n"
                 f"[#0A9396]    {tz_label} [/#0A9396]\n"
-                f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
+                #f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
+                f"[#3772FF bold] :[/] {lgap_str}\n"
                 f"[#800D80 bold] : {status_msg}[/#800D80 bold]\n"
                 "\n"
                 f"   [#FFC300] [/#FFC300] {state_icon} "
@@ -349,7 +350,7 @@ class GridLayoutTest(App):
                         gap = datetime.now(timezone.utc) - last_dt
                         minutes_idle = gap.total_seconds() / 60
                         if minutes_idle < 5:
-                            fade_color = "#d7af00"
+                            fade_color = "lime"
                         elif minutes_idle < 30:
                             fade_color = "#ffd700"
                         elif minutes_idle < 120:
@@ -396,24 +397,25 @@ class GridLayoutTest(App):
         yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
         yield Horizontal(
-            Button.success("DF Report"),
-            Button.success("Scrub Stat"),
-            Button.warning("ssh FF1"),
-            Button.warning("ssh FN2"),
-            Button.error("All Stop"),
-            Button.error("Workers Stop"),
-            Button("Primary", variant="primary"),
-            Button.success("Blowjob"),
-            Button.success("Success"),
-            Button("Spooge"),
-            Button("Butthole Bread"),
-            Button("Banana"),
-            Button("Fuck Off"),
-            Button("Bitches"),
-            Button("Cockring"),
-            Button("Fast Validate"),
-            Button("The Colonel"),
-            Button("Whatever", variant="primary"),
+            # Button.success("DF Report", id="but01"),
+            Button("DF Report", id="but01"),
+            Button("Scrub Stat"),
+            Button("ssh FF1"),
+            Button("ssh FN2"),
+            Button("ssh rpi05"),
+            Button("All Stop"),
+            Button("Primary"),
+            Button("Blowjob"),
+            # Button("Success"),
+            # Button("Spooge"),
+            # Button("Butthole Bread"),
+            # Button("Banana"),
+            # Button("Fuck Off"),
+            # Button("Bitches"),
+            # Button("Cockring"),
+            # Button("Fast Validate"),
+            # Button("The Colonel"),
+            # Button("Whatever", variant="primary"),
         )
 
     async def on_mount(self):
