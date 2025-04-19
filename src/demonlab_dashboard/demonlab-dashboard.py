@@ -312,7 +312,7 @@ class GridLayoutTest(App):
             new_content = (
                 f"[#0A9396] : {last_active_label}[/#0A9396]\n"
                 f"[#0A9396]    {tz_label} [/#0A9396]\n"
-                #f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
+                # f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
                 f"[#3772FF bold] :[/] {lgap_str}\n"
                 f"[#800D80 bold] : {status_msg}[/#800D80 bold]\n"
                 "\n"
