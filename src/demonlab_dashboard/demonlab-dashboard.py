@@ -418,7 +418,7 @@ class GridLayoutTest(App):
             # Button("The Colonel"),
             # Button("Whatever", variant="primary"),
         )
-        yield digits("88888", id="nums");
+        yield Digits("88888", id="nums");
         
     async def on_mount(self):
         # Start the background notification listener
