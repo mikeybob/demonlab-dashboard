@@ -1,8 +1,8 @@
 name: Monthly issue metrics Previous Month
 on:
   workflow_dispatch:
-  # schedule:
-  #  - cron: "3 2 1 * *"
+   schedule:
+    - cron: "3 2 1 * *"
 
 permissions:
   contents: read
@@ -32,7 +32,7 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:mikeybob/demonlab-dashboard is:issue label:"enhancement" created:${{ env.last_month }}'
+          SEARCH_QUERY: 'repo:mikeybob/demonlab-dashboard is:issue -label:"wontfix" created:${{ env.last_month }}'
 
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v5
