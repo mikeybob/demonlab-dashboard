@@ -1,4 +1,4 @@
-name: Monthly issue metrics Previous Month
+name: Monthly issue metrics Month to Today
 on:
   workflow_dispatch:
   # schedule:
