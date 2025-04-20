@@ -32,7 +32,7 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:mikeybob/demonlab-dashboard is:issue created:${{ env.last_month }} -reason:"not planned"'
+          SEARCH_QUERY: 'repo:mikeybob/demonlab-dashboard is:issue label:"enhancement" created:${{ env.last_month }}'
 
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v5
