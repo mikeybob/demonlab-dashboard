@@ -32,7 +32,7 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:mikeybob/demonlab-dashboard is:issue state:open OR or label:"Backend Design Change" label:"Database design change" OR label:"Frontend design change" OR label:enhancement or label:"Feature Request" created:${{ env.last_month }}'
+          SEARCH_QUERY: 'repo:mikeybob/demonlab-dashboard is:issue state:open AND 9label:"Backend Design Change" label:"Database design change" OR label:"Frontend design change" OR label:enhancement or label:"Feature Request") created:${{ env.last_month }}'
 
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v5
