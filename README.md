@@ -26,7 +26,9 @@ pip install demonlab-dashboard
 ```
 ## Internal Housekeeping
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/issue-metrics.yml?style=for-the-badge&label=Issue%20Metrics%20Monthly&color=darkgreen) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/issue-metrics-mtd.yml?style=for-the-badge&label=Issue%20Metrics%20Month%20To%20Date&color=darkgreen)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/issue-metrics.yml?style=for-the-badge&label=Issue%20Metrics%20Monthly&color=darkgreen) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/issue-metrics-mtd.yml?style=for-the-badge&label=Issue%20Metrics%20Month%20To%20Date&color=darkgreen) 
+
+![Change Demon Message to Community Changelog](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/mtx_msg.yml/badge.svg)
 
 
 
