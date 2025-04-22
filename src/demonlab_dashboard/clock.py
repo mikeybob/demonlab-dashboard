@@ -1,40 +1,30 @@
-from datetime import datetime
+# clock.py
+import asyncio
+import datetime
 
-from textual.app import App, ComposeResult
-from textual.widgets import Digits, Rule
-
-
-class ClockApp(App):
-    CSS = """
-    Screen {
-        align: center middle;
-    }
-    #clock {
-        border: double green;
-        content-align: center middle;
-        text-align: center;
-        width: 100;
-    }
-    Rule {
-        width: auto;
-        content-align: center middle;
-    }
-    """
-
-    def compose(self) -> ComposeResult:
-        #yield Rule(line_style="thick", id="hrule1")
-        yield Digits("", id="clock")
-        #yield Rule(line_style="thick", id="hrule2")
-
-    def on_ready(self) -> None:
-        self.update_clock()
-        self.set_interval(1, self.update_clock)
-
-    def update_clock(self) -> None:
-        clock = datetime.now().time()
-        self.query_one(Digits).update(f"{clock:%T}")
+from textual.reactive import reactive
+from textual.widget import Widget
+from textual.widgets import Digits
 
 
-if __name__ == "__main__":
-    app = ClockApp()
-    app.run(inline=True)
+class ClockWidget(Widget):
+    """A simple digital clock using Digits widget."""
+
+    time = reactive("00:00:00")  # Reactive state to store time
+
+    async def on_mount(self):
+        """Starts updating time once mounted."""
+        self.digits = Digits(self.time)
+        self.update(self.digits)
+        asyncio.create_task(self.update_time())
+
+    async def update_time(self):
+        """Updates the time every second."""
+        while True:
+            self.time = datetime.datetime.now().strftime("%H:%M:%S")
+            await asyncio.sleep(1)
+
+    def render(self):
+        """Updates the displayed time."""
+        self.digits.update(self.time)
+        return self.digits
