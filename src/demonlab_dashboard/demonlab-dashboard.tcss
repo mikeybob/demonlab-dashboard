@@ -119,3 +119,36 @@ Button {
     color: #ff00ff;
     column-span: 4;
 }
+
+Digits {
+    border: none green;
+    color: white;
+    padding: 1 5;
+}
+
+# Clock {
+#     width: 100%;
+# }
+
+.clockbox {
+    layout: grid;
+    grid-columns: 1fr;
+    grid-rows: 1fr;
+    grid-size: 2;
+    grid-gutter: 0;
+    column-span: 4;
+    height: 1fr;
+    width: 1fr;
+    background: black;
+    border: heavy blue;
+    border-title-background: white 5%;
+    border-title-style: underline;
+    content-align: center middle;
+    margin: 0;
+    padding: 0;
+}
+
+
+LoadingIndicator {
+    color: red;
+}

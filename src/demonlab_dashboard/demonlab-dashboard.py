@@ -3,13 +3,15 @@ import json
 import logging
 from datetime import datetime, timezone
 
+from textual_serve.server import Server
+from clock import ClockWidget
 import psycopg2
 from about import AboutScreen
 from psycopg2 import extensions
 from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, HorizontalScroll, VerticalScroll
+from textual.containers import Horizontal, Vertical, HorizontalScroll, VerticalScroll
 from textual.screen import Screen
 from textual.widgets import (
     Button,
@@ -21,6 +23,7 @@ from textual.widgets import (
     Placeholder,
     Rule,
     Static,
+    Switch,
 )
 
 # Configure logging
@@ -31,6 +34,8 @@ logging.basicConfig(
     filemode="a",
 )
 
+
+server = Server("python -m textual")
 
 class Anomoly(Screen):
     pass
@@ -377,7 +382,8 @@ class GridLayoutTest(App):
                     f"   [#FFC300] [/#FFC300] {state_icon} "
                     f"[#4c3e93]  [/#4c3e93][#279af1]  [/#279af1]"
                     f"[#0ebd8c]  [/#0ebd8c][#ff006e]  [/#ff006e]  "
-                    f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]"
+                    f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]",
+                    Digits(f"{index}", id=f"gap{index+1}")
                 )
                 user_label = Label(content, id=f"User{index+1}", classes="box")
                 user_label.border_title = (
@@ -398,27 +404,20 @@ class GridLayoutTest(App):
         yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
         yield Horizontal(
-            # Button.success("DF Report", id="but01"),
             Button("DF Report", id="but01"),
-            Button("Scrub Stat"),
-            Button("ssh FF1"),
-            Button("ssh FN2"),
-            Button("ssh rpi05"),
-            Button("All Stop"),
-            Button("Primary"),
-            Button("Blowjob"),
-            # Button("Success"),
-            # Button("Spooge"),
-            # Button("Butthole Bread"),
-            # Button("Banana"),
-            # Button("Fuck Off"),
-            # Button("Bitches"),
-            # Button("Cockring"),
-            # Button("Fast Validate"),
-            # Button("The Colonel"),
-            # Button("Whatever", variant="primary"),
+            Button("Scrub Stat", id="but02"),
+            Button("ssh FF1", id="but03"),
+            Button("ssh FN2", id="but04"),
+            Button("ssh rpi05", id="but05"),
+            Button("All Stop", id="but06"),
+            Button("Primary", id="but07"),
+            Button("Blowjob", id="but08")
         )
-        yield Digits("88888", id="nums")
+        yield Horizontal(
+                Vertical(Digits("00:00:00", id="clock1"),
+                     Digits("ABCDEF", id="nums1")
+                      ), classes="clockbox", id="clock"
+                    )
 
     async def on_mount(self):
         # Start the background notification listener
