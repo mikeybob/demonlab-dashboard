@@ -12,4 +12,4 @@ jobs:
          room_id: ${{ secrets.MATRIX_ROOM_ID }}
          access_token: ${{ secrets.MATRIX_ACCESS_TOKEN }}
          message: "Hello, world"
-         server: "matrix.org"
+         server: "demonlab.net"
