@@ -22,9 +22,9 @@ class ClockApp(App):
     """
 
     def compose(self) -> ComposeResult:
-        #yield Rule(line_style="thick", id="hrule1")
+        # yield Rule(line_style="thick", id="hrule1")
         yield Digits("", id="clock")
-        #yield Rule(line_style="thick", id="hrule2")
+        # yield Rule(line_style="thick", id="hrule2")
 
     def on_ready(self) -> None:
         self.update_clock()

@@ -3,15 +3,14 @@ import json
 import logging
 from datetime import datetime, timezone
 
-from textual_serve.server import Server
-from clock import ClockWidget
 import psycopg2
 from about import AboutScreen
+from clock import ClockWidget
 from psycopg2 import extensions
 from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, Vertical, HorizontalScroll, VerticalScroll
+from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
 from textual.screen import Screen
 from textual.widgets import (
     Button,
@@ -25,6 +24,7 @@ from textual.widgets import (
     Static,
     Switch,
 )
+from textual_serve.server import Server
 
 # Configure logging
 logging.basicConfig(
@@ -36,6 +36,7 @@ logging.basicConfig(
 
 
 server = Server("python -m textual")
+
 
 class Anomoly(Screen):
     pass
@@ -383,7 +384,7 @@ class GridLayoutTest(App):
                     f"[#4c3e93]  [/#4c3e93][#279af1]  [/#279af1]"
                     f"[#0ebd8c]  [/#0ebd8c][#ff006e]  [/#ff006e]  "
                     f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]",
-                    Digits(f"{index}", id=f"gap{index+1}")
+                    Digits(f"{index}", id=f"gap{index+1}"),
                 )
                 user_label = Label(content, id=f"User{index+1}", classes="box")
                 user_label.border_title = (
@@ -411,13 +412,13 @@ class GridLayoutTest(App):
             Button("ssh rpi05", id="but05"),
             Button("All Stop", id="but06"),
             Button("Primary", id="but07"),
-            Button("Blowjob", id="but08")
+            Button("Blowjob", id="but08"),
         )
         yield Horizontal(
-                Vertical(Digits("00:00:00", id="clock1"),
-                     Digits("ABCDEF", id="nums1")
-                      ), classes="clockbox", id="clock"
-                    )
+            Vertical(Digits("00:00:00", id="clock1"), Digits("ABCDEF", id="nums1")),
+            classes="clockbox",
+            id="clock",
+        )
 
     async def on_mount(self):
         # Start the background notification listener
