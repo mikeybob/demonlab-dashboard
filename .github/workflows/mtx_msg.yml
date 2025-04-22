@@ -1,4 +1,4 @@
-name: Send a hello world to matrix every 5 minutes
+name: Change Demon Message to Community Changelog
 on:
  workflow_dispatch:
  #schedule:
