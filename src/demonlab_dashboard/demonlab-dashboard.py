@@ -10,11 +10,7 @@ from psycopg2 import extensions
 from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-<<<<<<< HEAD
-from textual.containers import Horizontal, HorizontalScroll, VerticalScroll
-=======
 from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
->>>>>>> origin/Architecture-Realignment
 from textual.screen import Screen
 from textual.widgets import (
     Button,
@@ -38,12 +34,9 @@ logging.basicConfig(
 )
 
 
-<<<<<<< HEAD
-=======
 server = Server("python -m textual")
 
 
->>>>>>> origin/Architecture-Realignment
 class Anomoly(Screen):
     pass
 
@@ -389,12 +382,9 @@ class GridLayoutTest(App):
                     f"   [#FFC300] [/#FFC300] {state_icon} "
                     f"[#4c3e93]  [/#4c3e93][#279af1]  [/#279af1]"
                     f"[#0ebd8c]  [/#0ebd8c][#ff006e]  [/#ff006e]  "
-<<<<<<< HEAD
                     f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]"
-=======
                     f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]",
                     Digits(f"{index}", id=f"gap{index+1}"),
->>>>>>> origin/Architecture-Realignment
                 )
                 user_label = Label(content, id=f"User{index+1}", classes="box")
                 user_label.border_title = (
@@ -415,29 +405,14 @@ class GridLayoutTest(App):
         yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
         yield Horizontal(
-            # Button.success("DF Report", id="but01"),
             Button("DF Report", id="but01"),
-<<<<<<< HEAD
-            Button("Scrub Stat"),
-            Button("ssh FF1"),
-            Button("ssh FN2"),
-            Button("ssh rpi05"),
-            Button("All Stop"),
-            Button("Primary"),
-            Button("Blowjob"),
-            # Button("Success"),
-            # Button("Spooge"),
-            # Button("Butthole Bread"),
-            # Button("Banana"),
-            # Button("Fuck Off"),
-            # Button("Bitches"),
-            # Button("Cockring"),
-            # Button("Fast Validate"),
-            # Button("The Colonel"),
-            # Button("Whatever", variant="primary"),
-        )
-        yield Digits("88888", id="nums")
-=======
+            # Button("Scrub Stat"),
+            # Button("ssh FF1"),
+            # Button("ssh FN2"),
+            # Button("ssh rpi05"),
+            # Button("All Stop"),
+            # Button("Primary"),
+            # Button("Blowjob"),
             Button("Scrub Stat", id="but02"),
             Button("ssh FF1", id="but03"),
             Button("ssh FN2", id="but04"),
@@ -451,7 +426,6 @@ class GridLayoutTest(App):
             classes="clockbox",
             id="clock",
         )
->>>>>>> origin/Architecture-Realignment
 
     async def on_mount(self):
         # Start the background notification listener
