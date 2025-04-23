@@ -4,10 +4,13 @@ import logging
 from datetime import datetime, timezone
 
 import psycopg2
+from about import AboutScreen
+from clock import ClockWidget
 from psycopg2 import extensions
+from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, HorizontalScroll, VerticalScroll
+from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
 from textual.screen import Screen
 from textual.widgets import (
     Button,
@@ -17,8 +20,10 @@ from textual.widgets import (
     Label,
     LoadingIndicator,
     Placeholder,
+    Rule,
     Static,
 )
+from textual_serve.server import Server
 
 # Configure logging
 logging.basicConfig(
@@ -29,12 +34,7 @@ logging.basicConfig(
 )
 
 
-class SplashScreen(Screen):
-    pass
-
-
-class Settings(Screen):
-    pass
+server = Server("python -m textual")
 
 
 class Anomoly(Screen):
@@ -49,14 +49,10 @@ class Misc(Screen):
     pass
 
 
-class SystemHealth(Screen):
-    pass
-
-
 class GridLayoutTest(App):
     CSS_PATH = "demonlab-dashboard.tcss"
-    TITLE = "Admin Dashboard"
-    SUB_TITLE = "Demonlab"
+    TITLE = "Demonlab Dashboard"
+    SUB_TITLE = "Synapse and Sysadmin"
 
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
@@ -303,14 +299,14 @@ class GridLayoutTest(App):
                     gap = datetime.now(timezone.utc) - last_active_time
                     minutes_idle = gap.total_seconds() / 60
                     if minutes_idle < 5:
-                        fade_color = "#d7af00"
+                        fade_color = "lime"
                     elif minutes_idle < 30:
                         fade_color = "#ffd700"
                     elif minutes_idle < 120:
                         fade_color = "#888888"
                     else:
                         fade_color = "#444444"
-                    lgap_str = f"{gap.days}d {gap.seconds//3600}h {gap.seconds//60%60}m"
+                    lgap_str = f"[firebrick]{gap.days}d[/] [royalblue]{gap.seconds//3600}h[/] [orangered]{gap.seconds//60%60}m[/]"
                 except Exception as e:
                     logging.error(f"Error computing gap for {user_id}: {e}")
                     fade_color = "#444444"
@@ -320,8 +316,9 @@ class GridLayoutTest(App):
             last_active_label = info.get("last_active", "N/A")
             new_content = (
                 f"[#0A9396] : {last_active_label}[/#0A9396]\n"
-                f"[#0A9396]    {tz_label} [/#0A9396]\n"
-                f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
+                # f"[#0A9396]    {tz_label} [/#0A9396]\n"
+                # f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
+                f"[#3772FF bold] :[/] {lgap_str}\n"
                 f"[#800D80 bold] : {status_msg}[/#800D80 bold]\n"
                 "\n"
                 f"   [#FFC300] [/#FFC300] {state_icon} "
@@ -331,7 +328,8 @@ class GridLayoutTest(App):
             )
             widget.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
             widget.border_subtitle = (
-                f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
+                f"{tz_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
+                # f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
             )
             widget.update(new_content)
             widget.border = ("heavy", fade_color)
@@ -359,7 +357,7 @@ class GridLayoutTest(App):
                         gap = datetime.now(timezone.utc) - last_dt
                         minutes_idle = gap.total_seconds() / 60
                         if minutes_idle < 5:
-                            fade_color = "#d7af00"
+                            fade_color = "lime"
                         elif minutes_idle < 30:
                             fade_color = "#ffd700"
                         elif minutes_idle < 120:
@@ -386,14 +384,16 @@ class GridLayoutTest(App):
                     f"[#4c3e93]  [/#4c3e93][#279af1]  [/#279af1]"
                     f"[#0ebd8c]  [/#0ebd8c][#ff006e]  [/#ff006e]  "
                     f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]"
+                    f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]",
+                    Digits(f"{index}", id=f"gap{index+1}"),
                 )
                 user_label = Label(content, id=f"User{index+1}", classes="box")
                 user_label.border_title = (
                     f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
                 )
-                user_label.border_subtitle = (
-                    f"{active_icon}[grey35]{info['display_name']}[/grey35]"
-                )
+
+                user_label.border_subtitle = f"{last_active_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
+
                 user_label.border = ("heavy", fade_color)
                 self.user_widgets[user_id] = user_label
                 yield user_label
@@ -406,29 +406,88 @@ class GridLayoutTest(App):
         yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
         yield Horizontal(
-            Button.success("DF Report"),
-            Button.success("Scrub Stat"),
-            Button.warning("ssh FF1"),
-            Button.warning("ssh FN2"),
-            Button.error("All Stop"),
-            Button.error("Workers Stop"),
-            Button("Primary", variant="primary"),
-            Button.success("Blowjob"),
-            Button.success("Success"),
-            Button("Spooge"),
-            Button("Butthole Bread"),
-            Button("Banana"),
-            Button("Fuck Off"),
-            Button("Bitches"),
-            Button("Cockring"),
-            Button("Fast Validate"),
-            Button("The Colonel"),
-            Button("Whatever", variant="primary"),
+            Button("DF Report", id="but01"),
+            # Button("Scrub Stat"),
+            # Button("ssh FF1"),
+            # Button("ssh FN2"),
+            # Button("ssh rpi05"),
+            # Button("All Stop"),
+            # Button("Primary"),
+            # Button("Blowjob"),
+            Button("Scrub Stat", id="but02"),
+            Button("ssh FF1", id="but03"),
+            Button("ssh FN2", id="but04"),
+            Button("ssh rpi05", id="but05"),
+            Button("All Stop", id="but06"),
+            Button("Primary", id="but07"),
+            Button("Blowjob", id="but08"),
+        )
+        yield Horizontal(
+            Vertical(Digits("00:00:00", id="clock1"), Digits("ABCDEF", id="nums1")),
+            classes="clockbox",
+            id="clock",
         )
 
     async def on_mount(self):
         # Start the background notification listener
         self.notifications_task = asyncio.create_task(self.listen_notifications())
+
+        # Start system health updater task
+        asyncio.create_task(self.update_health())
+
+        # Show splash screen initially, fade-in effect clearly working
+        await self.push_screen(SplashScreen())
+
+        # Short delay clearly visible, then remove splash screen automatically
+
+        await asyncio.sleep(3)
+
+        await self.pop_screen()
+
+    async def update_health(self):
+        """Periodically update General System Health panel with query results explicitly."""
+        while True:
+            label, next_datapoint = await asyncio.to_thread(
+                self.query_db_next_datapoint
+            )
+
+            gsh_widget = self.query_one("#gsh", Static)
+            gsh_widget.update(
+                f"[b]General System Health[/b]\n\n{label}: {next_datapoint}"
+            )
+
+            await asyncio.sleep(60)
+
+    def query_db_next_datapoint(self):
+        """Correct synchronous DB query, safely executed explicitly."""
+        conn = psycopg2.connect(
+            dbname="synapse",
+            user="synapse_user",
+            password="synapse",
+            host="10.99.10.128",
+            port=5432,
+        )
+        try:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+            SELECT
+            trim('Next Datapoint') as "Label",
+            max(local_timestamp) + interval '3 hours' as "NEXT"
+            FROM synapx.reports
+            """
+            )
+            result = cursor.fetchone()
+
+            if result and result[1]:
+                label, next_datapoint = result
+                next_dp_str = next_datapoint.strftime("%Y-%m-%d %H:%M:%S")
+                return label, next_dp_str
+            else:
+                return "Next Datapoint", "N/A"
+        finally:
+            cursor.close()
+            conn.close()
 
     def action_null(self) -> None:
         """No-op action for 'b' key (beep)."""

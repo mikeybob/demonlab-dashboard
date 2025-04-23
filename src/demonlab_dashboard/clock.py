@@ -10,7 +10,10 @@ from textual.widgets import Digits
 class ClockWidget(Widget):
     """A simple digital clock using Digits widget."""
 
-    time = reactive("00:00:00")  # Reactive state to store time
+    # def compose(self) -> ComposeResult:
+    #     # yield Rule(line_style="thick", id="hrule1")
+    #     yield Digits("", id="clock")
+    #     # yield Rule(line_style="thick", id="hrule2")
 
     async def on_mount(self):
         """Starts updating time once mounted."""
