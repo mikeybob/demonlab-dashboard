@@ -1,4 +1,5 @@
-# Demonlab Dashboard  - Still very under development
+# Demonlab Dashboard  - Still very under development :
+![Toy Badge](https://img.shields.io/badge/project%20type-toy-blue)
 
 ### Stats: 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/github_workflows_ci.yml?style=for-the-badge&color=darkgreen) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mikeybob/demonlab-dashboard?style=for-the-badge&color=firebrick) ![GitHub top language](https://img.shields.io/github/languages/top/mikeybob/demonlab-dashboard?style=for-the-badge&logo=python&logoColor=darkblue&logoSize=auto&color=darkblue)
