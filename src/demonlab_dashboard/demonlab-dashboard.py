@@ -316,7 +316,7 @@ class GridLayoutTest(App):
             last_active_label = info.get("last_active", "N/A")
             new_content = (
                 f"[#0A9396] : {last_active_label}[/#0A9396]\n"
-                f"[#0A9396]    {tz_label} [/#0A9396]\n"
+                # f"[#0A9396]    {tz_label} [/#0A9396]\n"
                 # f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
                 f"[#3772FF bold] :[/] {lgap_str}\n"
                 f"[#800D80 bold] : {status_msg}[/#800D80 bold]\n"
@@ -328,7 +328,8 @@ class GridLayoutTest(App):
             )
             widget.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
             widget.border_subtitle = (
-                f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
+                f"{tz_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
+                # f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
             )
             widget.update(new_content)
             widget.border = ("heavy", fade_color)
@@ -390,9 +391,7 @@ class GridLayoutTest(App):
                 user_label.border_title = (
                     f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
                 )
-                user_label.border_subtitle = (
-                    f"{active_icon}[grey35]{info['display_name']}[/grey35]"
-                )
+                user_label.border_subtitle = f"{last_active_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
                 user_label.border = ("heavy", fade_color)
                 self.user_widgets[user_id] = user_label
                 yield user_label
