@@ -1,0 +1,10 @@
+textual-web --signup
+╭────────────────────────────────────╮
+│ You have signed up to textual-web! │
+╰────────────────────────────────────╯
+ • Wrote auth to '/home/mike/.config/textual-web/auth.json'
+ • Your API key is 'R34PVWBQURS1'
+ • Wrote 'ganglion.toml'
+
+Run 'textual-web --config ganglion.toml' to get started.
+
