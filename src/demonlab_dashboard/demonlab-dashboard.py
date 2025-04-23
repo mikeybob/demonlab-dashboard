@@ -4,10 +4,14 @@ import logging
 from datetime import datetime, timezone
 
 import psycopg2
+
 from about import AboutScreen
 from clock import ClockWidget
 from psycopg2 import extensions
 from startup import SplashScreen
+
+
+
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
@@ -23,7 +27,9 @@ from textual.widgets import (
     Rule,
     Static,
 )
+
 from textual_serve.server import Server
+
 
 # Configure logging
 logging.basicConfig(
@@ -37,6 +43,7 @@ logging.basicConfig(
 server = Server("python -m textual")
 
 
+
 class Anomoly(Screen):
     pass
 
@@ -47,6 +54,8 @@ class Alerts(Screen):
 
 class Misc(Screen):
     pass
+
+
 
 
 class GridLayoutTest(App):
@@ -328,8 +337,10 @@ class GridLayoutTest(App):
             )
             widget.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
             widget.border_subtitle = (
+
                 f"{tz_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
                 # f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
+
             )
             widget.update(new_content)
             widget.border = ("heavy", fade_color)
@@ -391,7 +402,9 @@ class GridLayoutTest(App):
                 user_label.border_title = (
                     f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
                 )
+
                 user_label.border_subtitle = f"{last_active_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
+
                 user_label.border = ("heavy", fade_color)
                 self.user_widgets[user_id] = user_label
                 yield user_label
