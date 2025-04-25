@@ -1,4 +1,4 @@
-name: Change Demon Message to Community Changelog
+name: Change Demon Message
 on:
  workflow_dispatch:
  #schedule:
@@ -12,5 +12,5 @@ jobs:
        with:
          room_id: ${{ secrets.MATRIX_ROOM_ID }}
          access_token: ${{ secrets.MATRIX_ACCESS_TOKEN }}
-         message: "Message from the Change Demon. °"
+         message: "(i) Backups of metrics have been re-instated. Barad-dûr is running."
          server: "demonlab.net"
