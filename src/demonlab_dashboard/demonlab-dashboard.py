@@ -316,20 +316,18 @@ class GridLayoutTest(App):
             last_active_label = info.get("last_active", "N/A")
             new_content = (
                 f"[#0A9396] : {last_active_label}[/#0A9396]\n"
-                # f"[#0A9396]    {tz_label} [/#0A9396]\n"
-                # f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
                 f"[#3772FF bold] :[/] {lgap_str}\n"
                 f"[#800D80 bold] : {status_msg}[/#800D80 bold]\n"
                 "\n"
                 f"   [#FFC300] [/#FFC300] {state_icon} "
                 f"[#4c3e93]  [/#4c3e93][#279af1]  [/#279af1]"
                 f"[#0ebd8c]  [/#0ebd8c][#ff006e]  [/#ff006e]  "
-                f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]"
+                f"[#8BC34A]  [/#8BC34A]\n"
+                #    f"[link='{avatar_url}'][/link]"
             )
             widget.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
             widget.border_subtitle = (
                 f"{tz_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
-                # f"{active_icon}[grey35]{info.get('display_name', user_id)}[/grey35]"
             )
             widget.update(new_content)
             widget.border = ("heavy", fade_color)
@@ -422,11 +420,7 @@ class GridLayoutTest(App):
             Button("Primary", id="but07"),
             Button("Blowjob", id="but08"),
         )
-        yield Horizontal(
-            Vertical(Digits("00:00:00", id="clock1"), Digits("ABCDEF", id="nums1")),
-            classes="clockbox",
-            id="clock",
-        )
+        yield Horizontal(ClockWidget(), id="clockface")
 
     async def on_mount(self):
         # Start the background notification listener
@@ -453,7 +447,7 @@ class GridLayoutTest(App):
 
             gsh_widget = self.query_one("#gsh", Static)
             gsh_widget.update(
-                f"[b]General System Health[/b]\n\n{label}: {next_datapoint}"
+                f"[b]General System Health[/b]\n\n[green]{label}: {next_datapoint}[/green]"
             )
 
             await asyncio.sleep(60)
