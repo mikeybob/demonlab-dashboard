@@ -495,6 +495,7 @@ class GridLayoutTest(App):
         """No-op action for 'a' key (about)."""
         return
 
+
 if __name__ == "__main__":
     app = GridLayoutTest()
     app.run()
