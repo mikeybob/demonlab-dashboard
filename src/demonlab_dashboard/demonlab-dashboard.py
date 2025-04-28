@@ -64,6 +64,7 @@ class GridLayoutTest(App):
         ),
         Binding(key="b", action="null", description="Beep"),
         Binding(key="p", action="null2", description="Plop"),
+        Binding(key="a", action="null3", description="About"),
     ]
 
     # Traffic light icons for user state
