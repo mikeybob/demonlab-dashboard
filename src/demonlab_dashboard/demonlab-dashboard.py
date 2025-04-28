@@ -491,6 +491,9 @@ class GridLayoutTest(App):
         """No-op action for 'p' key (plop)."""
         return
 
+    def action_null3(self) -> None:
+        """No-op action for 'a' key (about)."""
+        return
 
 if __name__ == "__main__":
     app = GridLayoutTest()
