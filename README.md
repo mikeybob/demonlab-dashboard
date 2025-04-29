@@ -13,6 +13,7 @@
 ### Misc:
 ![Matrix](https://img.shields.io/matrix/gitdev%3Ademonlab.net?server_fqdn=demonlab.net&style=for-the-badge&logo=matrix&logoColor=black&logoSize=auto&label=demonlab&labelColor=red) 
 
+[![Build and Deploy Documentation](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/build_docs.yml/badge.svg)](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/build_docs.yml)
 -----
 
 ## Table of Contents
