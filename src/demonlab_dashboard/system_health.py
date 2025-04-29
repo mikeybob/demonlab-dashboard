@@ -5,8 +5,7 @@ from textual.widgets import Static
 class SystemHealthPanel(Static):
     async def on_mount(self):
         label, next_datapoint = await self.fetch_health_data()
-        self.update(f"[b]General System Health[/b]\n{label}:[green bold]
-                    {next_datapoint}[/green /bold]")
+        self.update(f"[b]General System Health[/b]\n{label}:[green bold]{next_datapoint}[/green bold]")
 
     async def fetch_health_data(self):
         query = """
