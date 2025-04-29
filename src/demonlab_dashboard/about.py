@@ -1,8 +1,10 @@
 # about.py
 import asyncio
 
+from textual.containers import Horizontal, Vertical
 from textual.screen import Screen
 from textual.widgets import Static
+from textual_pyfiglet import FigletWidget
 
 
 class AboutScreen(Screen):
@@ -20,14 +22,15 @@ class AboutScreen(Screen):
             "on the DemonLab network."
         )
         self.message = Static(about_text, id="about-text")
-        self.message.styles.color = "#000000"
-        yield self.message
+        self.message.styles.color = "#FFFFFF"
+        yield Vertical(
+            FigletWidget("Demonlab Dashboard", id="abtfiglet", font="small"),
+            Static(about_text, id="abttext"),
+            id="abtfigbox",
+        )
 
     async def on_mount(self):
-        await self.fade_in_text()
-
-    async def fade_in_text(self):
-        color_steps = ["#222222", "#555555", "#888888", "#BBBBBB", "#FFFFFF"]
-        for shade in color_steps:
-            self.message.styles.color = shade
-            await asyncio.sleep(0.1)
+        yield Vertical(
+            FigletWidget("2 Demonlab Dashboard", id="abtfiglet", font="small"),
+            Static(f"{about_text}", id="abttext"),
+        )
