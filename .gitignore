@@ -21,3 +21,10 @@ prototype-examples/
 
 src/demonlab_dashboard/tex-web.txt
 /src/demonlab_dashboard/demonlab-dashboard.tcss.txt
+.
+
+src/demonlab_dashboard/fixed.py
+
+src/demonlab_dashboard/demonlab-dashboard.py-bu
+
+src/demonlab_dashboard/temp/
