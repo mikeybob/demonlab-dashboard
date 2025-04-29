@@ -65,6 +65,7 @@ class GridLayoutTest(App):
         Binding(key="b", action="null", description="Beep"),
         Binding(key="p", action="null2", description="Plop"),
         Binding(key="a", action="about", description="About"),
+        Binding(key="s", action="splashscreen", description="Splash"),
     ]
 
     # Traffic light icons for user state
@@ -406,13 +407,6 @@ class GridLayoutTest(App):
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
         yield Horizontal(
             Button("DF Report", id="but01"),
-            # Button("Scrub Stat"),
-            # Button("ssh FF1"),
-            # Button("ssh FN2"),
-            # Button("ssh rpi05"),
-            # Button("All Stop"),
-            # Button("Primary"),
-            # Button("Blowjob"),
             Button("Scrub Stat", id="but02"),
             Button("ssh FF1", id="but03"),
             Button("ssh FN2", id="but04"),
@@ -424,14 +418,14 @@ class GridLayoutTest(App):
         yield Horizontal(ClockWidget(), id="clockface")
 
     async def on_mount(self):
+        # Show splash screen initially, fade-in effect clearly working
+        await self.push_screen(SplashScreen())
+
         # Start the background notification listener
         self.notifications_task = asyncio.create_task(self.listen_notifications())
 
         # Start system health updater task
         asyncio.create_task(self.update_health())
-
-        # Show splash screen initially, fade-in effect clearly working
-        await self.push_screen(SplashScreen())
 
         # Short delay clearly visible, then remove splash screen automatically
 
@@ -494,6 +488,12 @@ class GridLayoutTest(App):
 
     def action_about(self) -> None:
         """No-op action for 'a' key (about)."""
+        self.push_screen(AboutScreen())
+        return
+
+    def action_splashscreen(self) -> None:
+        """No-op action for 's' key (splash)."""
+        self.push_screen(SplashScreen())
         return
 
 

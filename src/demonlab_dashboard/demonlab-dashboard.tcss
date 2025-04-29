@@ -2,10 +2,12 @@
 
 Screen {
     layout: grid;
+    color: white;
     background: black;
     grid-gutter: 1;
     grid-size: 6 4;
 }
+
 
 .box {
     height: 1fr;
@@ -78,6 +80,7 @@ Footer {
 
 Horizontal {
     layout: grid;
+    box-sizing: content-box;
     grid-size: 4;
     grid-gutter: 1;
     grid-rows: 1fr;
@@ -86,15 +89,16 @@ Horizontal {
     width: 1fr;
     height: 1fr;
     background: black;
-    border: heavy white;
+    border: outer white;
     content-align: center middle;
-    margin: 1;
-    padding: 1;
+    margin: 0;
+    padding: 0 0 0 0;
 }
 
 Button {
     color: auto;
-    margin: 0 1;
+    margin: 0;
+    box-sizing: content-box;
     width: 20;
     border: outer blue;
     padding: 0;
@@ -163,3 +167,99 @@ ClockWidget {
      padding: 0 0 0 2;
      box-sizing: content-box;
 }
+
+#Vertical {
+     background: green;
+     color: cyan;
+}
+
+
+
+#figletbox {
+     color: red;
+     layout: grid;
+     column-span: 3;
+     grid-size: 2;
+     grid-rows: 15;
+     grid-columns: 1fr;
+     width: 110;
+     height: 5;
+     color: red;
+     align: center top;
+     background: white 10%;
+     box-sizing: content-box;
+     border: double white;
+     padding: 0 0 0 5;
+     margin: 5 0 0 -40;
+
+}
+
+.figlet1 {
+     layout: grid;
+     column-span: 3;
+     grid-size: 2;
+     grid-rows: 5;
+     grid-columns: 1fr;
+     width: 110;
+     height: 5;
+     align: center top;
+     background: white;
+     box-sizing: content-box;
+     border: double white;
+     padding: 0 0 0 5;
+     margin: 5 0 0 0;
+
+}
+
+#abtfigbox {
+     border: dashed red;
+     background: goldenrod;
+     layout: grid;
+     grid-size: 2 4;
+     grid-rows: 50;
+     grid-columns: 1fr;
+     column-span: 4;
+     box-sizing: content-box;
+     align: right top;
+     height: 20;
+     width: 1fr;
+}
+
+.abtfiglet {
+     border: dashed red;
+     background: gray;
+     layout: grid;
+     grid-size: 2 2;
+     grid-rows: 3;
+     grid-columns: 3;
+     column-span: 2;
+     height: 15;
+     width: 1fr;
+     box-sizing: content-box;
+     align: right top;
+     margin: 3;
+     padding: 1;
+     color: black;
+}
+
+.about-text {
+     layout: grid;
+     grid-size: 3 3;
+     grid-rows: 15;
+     grid-columns: 2;
+     column-span: 2;
+     height: 5;
+     width: 109;
+     row-span: 1;
+     padding: 1;
+     border: thick green;
+     color: red;
+     background: royalblue;
+     box-sizing: content-box;
+     align: right top;
+
+}
+
+
+
+
