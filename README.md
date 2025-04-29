@@ -1,4 +1,4 @@
-# Demonlab Dashboard  - Still very under development :
+# Demonlab Dashboard  - Still WIP :
 ![Toy Badge](https://img.shields.io/badge/project%20type-toy-blue)
 
 ### Stats: 
