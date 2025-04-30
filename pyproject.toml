@@ -27,6 +27,7 @@ dependencies = [
   "asyncio==3.4.3",
   "asyncpg==0.30.0",
   "datetime==4.3.0",
+  "textual-pyfiglet==0.1.2"
 ]
 
 [project.urls]
