@@ -32,5 +32,6 @@ class AboutScreen(Screen):
     async def on_mount(self):
         yield Vertical(
             FigletWidget("Mount Demonlab Dashboard", id="figlet-text", font="small"),
-            Static(f"{about_text}", id="about-text"), id="about-box"
+            Static(f"{about_text}", id="about-text"),
+            id="about-box",
         )
