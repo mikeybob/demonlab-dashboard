@@ -426,9 +426,9 @@ class GridLayoutTest(App):
 
         # Start system health updater task
         asyncio.create_task(self.update_health())
-        
-        #TODO: Resolve no show at startup.
-        
+
+        # TODO: Resolve no show at startup.
+
         # Short delay clearly visible, then remove splash screen automatically
 
         await asyncio.sleep(3)
