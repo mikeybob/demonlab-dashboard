@@ -271,17 +271,8 @@ ClockWidget {
 
 }
 
-#abtfigbox {
-     border: heavy blue;
-     color: white;
-}
+<<<<<<< HEAD
+=======
 
-#abttext {
-     border: double green;
-     color: white;
-}
-
-#abtfiglet {
-     border: wide yellow;
-     color: white;
-}
+# These might be unused depending on what is correct in about.py
+>>>>>>> 3c187fceb9def6fa3e63570c2645a80ebfdfacac
