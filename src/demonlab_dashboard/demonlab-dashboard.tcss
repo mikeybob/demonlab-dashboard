@@ -282,6 +282,6 @@ abttext {
 }
 
 abtfiglet {
-     border: wide yellow
+     border: wide yellow;
      color: white;
 }
