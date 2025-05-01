@@ -406,7 +406,9 @@ class GridLayoutTest(App):
         # yield Horizontal(Vertical(ClockWidget(id="clockface"), ProgressBar(total=100)))
         yield Horizontal(ClockWidget(), id="clockface")
         yield Static("[b]General System Health[/b]", classes="box", id="gsh")
+        # yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
         yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
+        # yield Datatable("[b]System Alerts[/b]", classes="box", id="alrt")
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
         yield Horizontal(
             Button("DF Report", id="but01"),
