@@ -277,7 +277,7 @@ abtfigbox {
 }
 
 abttext {
-     border: double green
+     border: double green;
      color: white;
 }
 
