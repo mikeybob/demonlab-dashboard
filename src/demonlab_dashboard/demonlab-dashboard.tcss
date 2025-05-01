@@ -271,17 +271,17 @@ ClockWidget {
 
 }
 
-abtfigbox {
+#abtfigbox {
      border: heavy blue;
      color: white;
 }
 
-abttext {
+#abttext {
      border: double green;
      color: white;
 }
 
-abtfiglet {
+#abtfiglet {
      border: wide yellow;
      color: white;
 }
