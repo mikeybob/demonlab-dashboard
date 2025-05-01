@@ -416,7 +416,6 @@ class GridLayoutTest(App):
             Button("Primary", id="but07"),
             Button("Blowjob", id="but08"),
         )
-        yield Horizontal(ClockWidget(), id="clockface")
 
     async def on_mount(self):
         # Show splash screen initially, fade-in effect clearly working

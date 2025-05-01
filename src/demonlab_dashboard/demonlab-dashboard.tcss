@@ -92,7 +92,7 @@ Horizontal {
     border: outer white;
     content-align: center middle;
     margin: 0;
-    padding: 0 0 0 0;
+    padding: 1 0 0 0;
 }
 
 Button {
@@ -127,47 +127,49 @@ Button {
 }
 
 ClockWidget {
-    layout: grid;
-    grid-size: 2;
-    grid-rows: 1fr;
-    grid-columns: 1fr;
+   # layout: center;
+   # grid-size: 2;
+   # grid-rows: 1fr;
+   # grid-columns: 1fr;
     align: center middle;
     content-align: center middle;
-    column-span: 2;
+    column-span: 4;
     height: 100%;
-    background: blue;
+    background: black;
     width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: content-box;
-    border: double yellow;
+    border: none yellow;
 }
 
 #clockface {
-     border: none white;
+    # layout: center;
+     border: tall firebrick;
      align: left middle;
      content-align: center middle;
      background: black;
-     column-span: 2;
+     column-span: 1;
      height: 1fr;
      color: firebrick;
      width: 100%;
      padding: 0;
-     margin: 1;
+     margin: 1 0 0 0;
      box-sizing: content-box;
 }
 
 #clock {
+    # layout: center;
      align: center middle;
      content-align: center middle;
      color: white;
      background: black;
-     border: double white;
+     border: none white;
      column-span: 2;
-     width: 80%;
+     width: auto;
      height: auto;
-     margin: 0 0 0 0;
-     padding: 0 0 0 0;
+     margin: 0;
+     padding: 0;
      box-sizing: content-box;
 }
 
@@ -271,8 +273,5 @@ ClockWidget {
 
 }
 
-<<<<<<< HEAD
-=======
 
 # These might be unused depending on what is correct in about.py
->>>>>>> 3c187fceb9def6fa3e63570c2645a80ebfdfacac
