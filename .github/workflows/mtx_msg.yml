@@ -1,4 +1,6 @@
 name: Change Demon Message
+permissions:
+  contents: read
 on:
  workflow_dispatch:
  #schedule:
