@@ -401,7 +401,8 @@ class GridLayoutTest(App):
                 # Empty panel placeholder
                 yield Label("", id=f"User{index+1}", classes="box empty_box")
         # Other panels and controls
-        yield Static("[b]Options Misc2[/b]", classes="box", id="opts")
+        #yield Static("[b]Options Misc2[/b]", classes="box", id="opts")
+        yield Horizontal(ClockWidget(), id="clockface")
         yield Static("[b]General System Health[/b]", classes="box", id="gsh")
         yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
