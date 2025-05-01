@@ -1,4 +1,4 @@
-# Demonlab Dashboard  - Still very under development :
+# Demonlab Dashboard  - Still WIP :
 ![Toy Badge](https://img.shields.io/badge/project%20type-toy-blue)
 
 ### Stats: 
@@ -13,6 +13,7 @@
 ### Misc:
 ![Matrix](https://img.shields.io/matrix/gitdev%3Ademonlab.net?server_fqdn=demonlab.net&style=for-the-badge&logo=matrix&logoColor=black&logoSize=auto&label=demonlab&labelColor=red) 
 
+[![Build and Deploy Documentation](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/build_docs.yml/badge.svg)](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/build_docs.yml)
 -----
 
 ## Table of Contents
