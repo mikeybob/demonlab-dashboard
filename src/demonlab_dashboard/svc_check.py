@@ -27,6 +27,7 @@ class ServiceStatusChecker:
             print(f"Error checking service status: {e}")
             return False
 
+
 class ServiceStatusApp(App):
     """Textual app to display service statuses in a table."""
 
@@ -38,8 +39,7 @@ class ServiceStatusApp(App):
         self.username = username
         self.hostname = hostname
         self.checkers = [
-            ServiceStatusChecker(username, hostname, service)
-            for service in services
+            ServiceStatusChecker(username, hostname, service) for service in services
         ]
 
     def compose(self) -> ComposeResult:
@@ -61,6 +61,7 @@ class ServiceStatusApp(App):
                 checker.hostname,
             )
 
+
 def main():
     services_to_check = [
         "barad-dur",
@@ -76,6 +77,7 @@ def main():
 
     app = ServiceStatusApp(services_to_check, username, hostname)
     app.run()
+
 
 if __name__ == "__main__":
     main()
