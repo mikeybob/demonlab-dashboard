@@ -20,6 +20,7 @@ from textual.widgets import (
     Label,
     LoadingIndicator,
     Placeholder,
+    ProgressBar,
     Rule,
     Static,
 )
@@ -402,6 +403,7 @@ class GridLayoutTest(App):
                 yield Label("", id=f"User{index+1}", classes="box empty_box")
         # Other panels and controls
         # yield Static("[b]Options Misc2[/b]", classes="box", id="opts")
+        # yield Horizontal(Vertical(ClockWidget(id="clockface"), ProgressBar(total=100)))
         yield Horizontal(ClockWidget(), id="clockface")
         yield Static("[b]General System Health[/b]", classes="box", id="gsh")
         yield Static("[b]System Alerts[/b]", classes="box", id="alrt")

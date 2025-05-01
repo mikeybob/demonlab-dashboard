@@ -121,16 +121,12 @@ Button {
 }
 
 .title {
-    text-style: bold;
+    text-style: underline;
     color: #ff00ff;
     column-span: 4;
 }
 
 ClockWidget {
-   # layout: center;
-   # grid-size: 2;
-   # grid-rows: 1fr;
-   # grid-columns: 1fr;
     align: center middle;
     content-align: center middle;
     column-span: 4;
@@ -144,22 +140,20 @@ ClockWidget {
 }
 
 #clockface {
-    # layout: center;
-     border: tall firebrick;
+     border: wide firebrick;
      align: left middle;
      content-align: center middle;
-     background: black;
+     background: white;
      column-span: 1;
      height: 1fr;
-     color: firebrick;
      width: 100%;
+     color: firebrick;
      padding: 0;
      margin: 1 0 0 0;
      box-sizing: content-box;
 }
 
 #clock {
-    # layout: center;
      align: center middle;
      content-align: center middle;
      color: white;
@@ -199,22 +193,6 @@ ClockWidget {
 
 }
 
-.figlet1 {
-     layout: grid;
-     column-span: 3;
-     grid-size: 2;
-     grid-rows: 5;
-     grid-columns: 1fr;
-     width: 110;
-     height: 5;
-     align: center top;
-     background: white;
-     box-sizing: content-box;
-     border: double white;
-     padding: 0 0 0 5;
-     margin: 5 0 0 0;
-
-}
 
 # The box containing the figlet and about text
 #about-box {
@@ -273,5 +251,50 @@ ClockWidget {
 
 }
 
+SplashScreen {
+     align: center middle;
+     content-align: center middle;
+}
+
+#figlet1 {
+     column-span: 5;
+     width:  85%;
+     height: 40%;
+     align: center top;
+     background: black;
+     box-sizing: content-box;
+     border: none white;
+     padding: 0;
+     margin:  0;
+
+}
+
+#splash-text {
+     content-align: center middle;
+     align: center bottom;
+     border: none red;
+     margin: 0;
+     padding: 0;
+     height: auto;
+     width: auto;
+     column-span: 4;
+     row-span: 3;
+     margin: 0 2 0 0;
+     padding: 0 1 2 35;
+}
+
+#splash-stack {
+     layout: grid;
+     grid-size: 4;
+     content-align: center top;
+     height: 50%;
+     width: 70%;
+     grid-rows: 3fr;
+     grid-columns: 1fr;
+     align: center middle;
+     column-span: 4;
+     row-span: 5;
+     border: thick blue;
+}
 
 # These might be unused depending on what is correct in about.py
