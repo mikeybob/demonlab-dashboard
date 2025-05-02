@@ -23,19 +23,11 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-<<<<<<< HEAD
+
   "textual~=3.0.0",
   "asyncio==3.4.3",
   "asyncpg==0.30.0",
   "datetime==4.3.0",
-=======
-  "textual==3.1.1",
-  "asyncio==3.4.3",
-  "asyncpg==0.30.0",
-  "datetime==5.5",
-  "textual-pyfiglet==0.1.2",
-  "rich==1.8.0"
->>>>>>> 15fc75ff0ed6da64752abeb4f809729ede1587e5
 ]
 
 [project.urls]
