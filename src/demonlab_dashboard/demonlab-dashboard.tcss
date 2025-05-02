@@ -38,25 +38,27 @@ Screen {
     background: transparent;
     color: white;
     height: 1fr;
-    border: tall white;
+    border: solid white;
     content-align: center top;
     border-title-background: white 5%;
     border-title-style: underline;
 }
 
-#alrt {
+#service-status {
     column-span: 2;
-    background: transparent;
+    row-span: 2;
+    background: black;
     height: 1fr;
-    border: tall white;
+    border: solid white;
     content-align: center top;
+    margin: 1 0 0 0;
 }
 
 #msc {
     column-span: 1;
     background: transparent;
     height: 1fr;
-    border: tall white;
+    border: solid white;
     content-align: center top;
 }
 
@@ -92,7 +94,7 @@ Horizontal {
     border: outer white;
     content-align: center middle;
     margin: 0;
-    padding: 0 0 0 0;
+    padding: 1 0 0 0;
 }
 
 Button {
@@ -121,50 +123,49 @@ Button {
 }
 
 .title {
-    text-style: bold;
+    text-style: underline;
     color: #ff00ff;
     column-span: 4;
 }
 
 ClockWidget {
-    layout: grid;
-    grid-size: 2;
-    grid-rows: 1fr;
-    grid-columns: 1fr;
     align: center middle;
-    column-span: 2;
+    content-align: center middle;
+    column-span: 4;
     height: 100%;
-    background: blue;
+    background: black;
     width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: content-box;
-    border: double yellow;
+    border: none yellow;
 }
 
 #clockface {
-     border: none white;
-     align: center middle;
+     border: solid firebrick;
+     align: left middle;
+     content-align: center middle;
      background: black;
-     column-span: 2;
+     column-span: 1;
      height: 1fr;
-     color: firebrick;
      width: 100%;
+     color: firebrick;
      padding: 0;
-     margin: 1;
+     margin: 1 0 0 0;
      box-sizing: content-box;
 }
 
 #clock {
      align: center middle;
+     content-align: center middle;
      color: white;
-     background: darkgreen;
-     border: double white;
+     background: black;
+     border: none white;
      column-span: 2;
-     width: 80%;
+     width: auto;
      height: auto;
-     margin: 0 0 0 0;
-     padding: 0 0 0 2;
+     margin: 0;
+     padding: 0;
      box-sizing: content-box;
 }
 
@@ -194,38 +195,29 @@ ClockWidget {
 
 }
 
-.figlet1 {
+
+# The box containing the figlet and about text
+#about-box {
+     color: red;
      layout: grid;
      column-span: 3;
      grid-size: 2;
-     grid-rows: 5;
+     grid-rows: 15;
      grid-columns: 1fr;
      width: 110;
      height: 5;
+     color: red;
      align: center top;
-     background: white;
+     background: white 10%;
      box-sizing: content-box;
      border: double white;
      padding: 0 0 0 5;
-     margin: 5 0 0 0;
+     margin: 5 0 0 -40;
 
 }
 
-#abtfigbox {
-     border: dashed red;
-     background: goldenrod;
-     layout: grid;
-     grid-size: 2 4;
-     grid-rows: 50;
-     grid-columns: 1fr;
-     column-span: 4;
-     box-sizing: content-box;
-     align: right top;
-     height: 20;
-     width: 1fr;
-}
-
-.abtfiglet {
+# Text that the figlet is displaying
+.figlet-text {
      border: dashed red;
      background: gray;
      layout: grid;
@@ -242,6 +234,7 @@ ClockWidget {
      color: black;
 }
 
+# The regular text below the figlet
 .about-text {
      layout: grid;
      grid-size: 3 3;
@@ -260,6 +253,50 @@ ClockWidget {
 
 }
 
+SplashScreen {
+     align: center middle;
+     content-align: center middle;
+}
 
+#figlet1 {
+     column-span: 5;
+     width:  85%;
+     height: 40%;
+     align: center top;
+     background: black;
+     box-sizing: content-box;
+     border: none white;
+     padding: 0;
+     margin:  0;
 
+}
 
+#splash-text {
+     content-align: center middle;
+     align: center bottom;
+     border: none red;
+     margin: 0;
+     padding: 0;
+     height: auto;
+     width: auto;
+     column-span: 4;
+     row-span: 3;
+     margin: 0 2 0 0;
+     padding: 0 1 2 35;
+}
+
+#splash-stack {
+     layout: grid;
+     grid-size: 4;
+     content-align: center top;
+     height: 50%;
+     width: 70%;
+     grid-rows: 3fr;
+     grid-columns: 1fr;
+     align: center middle;
+     column-span: 4;
+     row-span: 5;
+     border: thick blue;
+}
+
+# These might be unused depending on what is correct in about.py

@@ -21,16 +21,17 @@ class AboutScreen(Screen):
             "for monitoring system health, alerts, and user activity\n"
             "on the DemonLab network."
         )
-        self.message = Static(about_text, id="about-text")
+        self.message = Static(about_text, id="abttext")
         self.message.styles.color = "#FFFFFF"
         yield Vertical(
-            FigletWidget("Demonlab Dashboard", id="abtfiglet", font="small"),
+            FigletWidget("Compose Demonlab Dashboard", id="abtfiglet", font="small"),
             Static(about_text, id="abttext"),
             id="abtfigbox",
         )
 
     async def on_mount(self):
         yield Vertical(
-            FigletWidget("2 Demonlab Dashboard", id="abtfiglet", font="small"),
-            Static(f"{about_text}", id="abttext"),
+            FigletWidget("Mount Demonlab Dashboard", id="figlet-text", font="small"),
+            Static(f"{about_text}", id="about-text"),
+            id="about-box",
         )
