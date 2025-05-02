@@ -7,6 +7,7 @@ import psycopg2
 from about import AboutScreen
 from clock import ClockWidget
 from psycopg2 import extensions
+from services_data_table import ServiceStatusWidget
 from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
@@ -20,6 +21,7 @@ from textual.widgets import (
     Label,
     LoadingIndicator,
     Placeholder,
+    ProgressBar,
     Rule,
     Static,
 )
@@ -37,16 +39,16 @@ logging.basicConfig(
 server = Server("python -m textual")
 
 
-class Anomoly(Screen):
-    pass
-
-
-class Alerts(Screen):
-    pass
-
-
-class Misc(Screen):
-    pass
+# class Anomoly(Screen):
+#     pass
+#
+#
+# class Alerts(Screen):
+#     pass
+#
+#
+# class Misc(Screen):
+#     pass
 
 
 class GridLayoutTest(App):
@@ -400,11 +402,30 @@ class GridLayoutTest(App):
             else:
                 # Empty panel placeholder
                 yield Label("", id=f"User{index+1}", classes="box empty_box")
-        # Other panels and controls
-        yield Static("[b]Options Misc2[/b]", classes="box", id="opts")
+        # End of user panels
+
+        # System health box
         yield Static("[b]General System Health[/b]", classes="box", id="gsh")
-        yield Static("[b]System Alerts[/b]", classes="box", id="alrt")
+        # System health end.
+
+        #
+        yield Horizontal(ClockWidget(), id="clockface")
+        #
+
+        # New code for services panel
+        yield ServiceStatusWidget(
+            services=["sshd", "nginx", "barad-dur", "postgresql", "dnsmasq", "unbound"],
+            username="mike",
+            hostname="pi0501",
+            id="service-status",
+        )
+        # end on new panel code
+
+        # System misc. box
         yield Static("[b]System Misc.[/b]", classes="box", id="msc")
+        # SMisc end.
+
+        # Action buttons
         yield Horizontal(
             Button("DF Report", id="but01"),
             Button("Scrub Stat", id="but02"),
@@ -415,7 +436,10 @@ class GridLayoutTest(App):
             Button("Primary", id="but07"),
             Button("Blowjob", id="but08"),
         )
-        yield Horizontal(ClockWidget(), id="clockface")
+
+    # def compose(self) -> ComposeResult:
+    #    yield Header()
+    #    yield Footer()
 
     async def on_mount(self):
         # Show splash screen initially, fade-in effect clearly working
@@ -426,6 +450,8 @@ class GridLayoutTest(App):
 
         # Start system health updater task
         asyncio.create_task(self.update_health())
+
+        # TODO: Resolve no show at startup.
 
         # Short delay clearly visible, then remove splash screen automatically
 
