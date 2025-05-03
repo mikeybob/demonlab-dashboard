@@ -1,19 +1,24 @@
-name: Todos to issue
+name: Scan for TODO Tags
 
 on:
   push:
     branches:
-      - 'trunk'
+      - '*'
+    paths-ignore:
+      - 'docs/**'  # Ignore documentation files
+      - '.github/**'  # Ignore workflow definitions
+      - '*.md'  # Ignore Markdown files
+      - 'gh-pages/**'  # Ignore gh-pages branch
+  workflow_dispatch:
 
 jobs:
-  todos-to-issue:
+  scan:
     runs-on: ubuntu-latest
-    name: Looks for TODO comments in the source code and creates an issue with the found TODOs
-    permissions:
-      pull-requests: write
-      issues: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Run todos to issue action
-        uses: nearform-actions/github-action-todos-to-issue@v1
+
+      - name: Scan for TODO tags
+        run: |
+          grep -r 'TODO' . || echo "No TODOs found"
