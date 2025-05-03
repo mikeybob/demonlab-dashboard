@@ -1,76 +1,46 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "demonlab-dashboard"
-dynamic = ["version"]
-description = ''
+version = "0.1.0"
+description = ""
 readme = "README.md"
-requires-python = ">=3.8"
-license = "MIT"
-keywords = []
+requires-python = ">=3.10"
+license = { text = "MIT" }
 authors = [
-  { name = "Mike Demondad", email = "mike@demonlab.net" },
+  { name = "Mike Demondad", email = "mike@demonlab.net" }
 ]
+keywords = []
 classifiers = [
   "Development Status :: 4 - Beta",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
+  "Programming Language :: Python :: Implementation :: PyPy"
 ]
 dependencies = [
-
-  "textual~=3.0.0",
+  "textual==3.2.0",
   "asyncio==3.4.3",
   "asyncpg==0.30.0",
   "datetime==4.3.0",
+  "psycopg2",
+  "rich>=14.0.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.0.0",
+  "black",
+  "isort",
+  "coverage",
+  "textual-pyfiglet",
+  "textual-dev",
+  "psycopg2"
+]
+
+[project.scripts]
+start = "demonlab_dashboard.main:main"
 
 [project.urls]
 Documentation = "https://github.com/demonglobal/demonlab-dashboard#readme"
 Issues = "https://github.com/demonglobal/demonlab-dashboard/issues"
 Source = "https://github.com/demonglobal/demonlab-dashboard"
-
-[tool.hatch.version]
-path = "src/demonlab_dashboard/__about__.py"
-
-[tool.hatch.envs.types]
-extra-dependencies = [
-  "mypy>=1.0.0",
-]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/demonlab_dashboard tests}"
-
-[tool.coverage.run]
-source_pkgs = ["demonlab_dashboard", "tests"]
-branch = true
-parallel = true
-omit = [
-  "src/demonlab_dashboard/__about__.py",
-]
-
-[tool.coverage.paths]
-demonlab_dashboard = ["src/demonlab_dashboard", "*/demonlab-dashboard/src/demonlab_dashboard"]
-tests = ["tests", "*/demonlab-dashboard/tests"]
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
-
-[tool.black]
-line-length = 88
-target-version = ['py310']
-include = '\.pyi?$'
-
-[tool.isort]
-profile = "black"
-line_length = 88
-known_first_party = "demonlab_dashboard"
-

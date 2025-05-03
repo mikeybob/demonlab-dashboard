@@ -52,7 +52,7 @@ server = Server("python -m textual")
 
 
 class GridLayoutTest(App):
-    CSS_PATH = "demonlab-dashboard.tcss"
+    CSS_PATH = "styles/demonlab-dashboard.tcss"
     TITLE = "Demonlab Dashboard"
     SUB_TITLE = "Synapse and Sysadmin"
 
@@ -523,6 +523,10 @@ class GridLayoutTest(App):
         return
 
 
-if __name__ == "__main__":
+def main():
     app = GridLayoutTest()
     app.run()
+
+
+if __name__ == "__main__":
+    main()

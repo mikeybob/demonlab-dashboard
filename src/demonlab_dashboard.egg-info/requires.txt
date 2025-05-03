@@ -1,0 +1,15 @@
+textual==3.2.0
+asyncio==3.4.3
+asyncpg==0.30.0
+datetime==4.3.0
+psycopg2
+rich>=14.0.0
+
+[dev]
+mypy>=1.0.0
+black
+isort
+coverage
+textual-pyfiglet
+textual-dev
+psycopg2
