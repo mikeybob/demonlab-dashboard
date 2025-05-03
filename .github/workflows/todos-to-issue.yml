@@ -1,0 +1,24 @@
+name: Scan for TODO Tags
+
+on:
+  push:
+    branches:
+      - '*'
+    paths-ignore:
+      - 'docs/**'  # Ignore documentation files
+      - '.github/**'  # Ignore workflow definitions
+      - '*.md'  # Ignore Markdown files
+      - 'gh-pages/**'  # Ignore gh-pages branch
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Scan for TODO tags
+        run: |
+          grep -r 'TODO' . || echo "No TODOs found"
