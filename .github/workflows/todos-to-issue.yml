@@ -1,0 +1,19 @@
+name: Todos to issue
+
+on:
+  push:
+    branches:
+      - 'trunk'
+
+jobs:
+  todos-to-issue:
+    runs-on: ubuntu-latest
+    name: Looks for TODO comments in the source code and creates an issue with the found TODOs
+    permissions:
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Run todos to issue action
+        uses: nearform-actions/github-action-todos-to-issue@v1
