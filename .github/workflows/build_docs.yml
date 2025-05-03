@@ -2,12 +2,13 @@ name: Build and Deploy Documentation
 
 on:
   push:
-  workflow_dispatch:
     branches:
       - trunk
+      - dev  # Added dev branch
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Changed from read to write for pushing to gh-pages
   pages: write
 
 jobs:
@@ -32,6 +33,7 @@ jobs:
           sphinx-build -b html docs/ docs/_build/
 
       - name: Deploy to GitHub Pages
+        if: github.ref != 'refs/heads/gh-pages'  # Ensure deployment doesn't re-trigger on gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
