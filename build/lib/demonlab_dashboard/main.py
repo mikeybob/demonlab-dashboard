@@ -406,7 +406,15 @@ class GridLayoutTest(App):
 
         # New code for services panel
         yield ServiceStatusWidget(
-            services=["sshd", "nginx", "barad-dur", "postgresql", "dnsmasq", "unbound"],
+            services=[
+                "sshd",
+                "nginx",
+                "barad-dur",
+                "postgresql",
+                "dnsmasq",
+                "unbound",
+                "redis",
+            ],
             username="mike",
             hostname="pi0501",
             id="service-status",

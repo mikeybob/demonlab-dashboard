@@ -14,6 +14,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy"
 ]
@@ -22,7 +23,7 @@ dependencies = [
   "asyncio==3.4.3",
   "asyncpg==0.30.0",
   "datetime==4.3.0",
-  "psycopg2",
+  "psycopg2-binary",
   "rich>=14.0.0",
 ]
 
@@ -34,7 +35,7 @@ dev = [
   "coverage",
   "textual-pyfiglet",
   "textual-dev",
-  "psycopg2"
+  "psycopg2-binary"
 ]
 
 [project.scripts]
