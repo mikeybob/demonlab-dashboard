@@ -4,11 +4,7 @@ import logging
 from datetime import datetime, timezone
 
 import psycopg2
-from about import AboutScreen
-from clock import ClockWidget
 from psycopg2 import extensions
-from services_data_table import ServiceStatusWidget
-from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
@@ -26,6 +22,11 @@ from textual.widgets import (
     Static,
 )
 from textual_serve.server import Server
+
+from about import AboutScreen
+from clock import ClockWidget
+from services_data_table import ServiceStatusWidget
+from startup import SplashScreen
 
 # Configure logging
 logging.basicConfig(
@@ -414,7 +415,15 @@ class GridLayoutTest(App):
 
         # New code for services panel
         yield ServiceStatusWidget(
-            services=["sshd", "nginx", "barad-dur", "postgresql", "dnsmasq", "unbound"],
+            services=[
+                "sshd",
+                "nginx",
+                "barad-dur",
+                "postgresql",
+                "dnsmasq",
+                "unbound",
+                "redis",
+            ],
             username="mike",
             hostname="pi0501",
             id="service-status",
