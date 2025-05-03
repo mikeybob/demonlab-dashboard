@@ -300,3 +300,18 @@ SplashScreen {
 }
 
 # These might be unused depending on what is correct in about.py
+
+/* Custom table style */
+.ServiceStatusWidget {
+    /* Basic styling */
+    background: firebrick;
+    border: round indigo;
+    padding: 0;
+
+    }
+
+DataTable {
+    background: firebrick 20%;
+    color: white;
+
+}

@@ -4,20 +4,29 @@ import logging
 from datetime import datetime, timezone
 
 import psycopg2
-from about import AboutScreen
-from clock import ClockWidget
 from psycopg2 import extensions
-from services_data_table import ServiceStatusWidget
-from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import (Horizontal, HorizontalScroll, Vertical,
-                                VerticalScroll)
+from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
 from textual.screen import Screen
-from textual.widgets import (Button, Digits, Footer, Header, Label,
-                             LoadingIndicator, Placeholder, ProgressBar, Rule,
-                             Static)
+from textual.widgets import (
+    Button,
+    Digits,
+    Footer,
+    Header,
+    Label,
+    LoadingIndicator,
+    Placeholder,
+    ProgressBar,
+    Rule,
+    Static,
+)
 from textual_serve.server import Server
+
+from about import AboutScreen
+from clock import ClockWidget
+from services_data_table import ServiceStatusWidget
+from startup import SplashScreen
 
 # Configure logging
 logging.basicConfig(
@@ -29,18 +38,6 @@ logging.basicConfig(
 
 
 server = Server("python -m textual")
-
-
-# class Anomoly(Screen):
-#     pass
-#
-#
-# class Alerts(Screen):
-#     pass
-#
-#
-# class Misc(Screen):
-#     pass
 
 
 class GridLayoutTest(App):
@@ -329,8 +326,8 @@ class GridLayoutTest(App):
             widget.border = ("heavy", fade_color)
 
     def compose(self) -> ComposeResult:
-        yield Footer()
         yield Header()
+        yield Footer()
         # Yield user panels (two rows of 6)
         actual_count = len(self.displayed_users)
         for index in range(12):
@@ -437,10 +434,6 @@ class GridLayoutTest(App):
             Button("Blowjob", id="but08"),
         )
 
-    # def compose(self) -> ComposeResult:
-    #    yield Header()
-    #    yield Footer()
-
     async def on_mount(self):
         # Show splash screen initially, fade-in effect clearly working
         await self.push_screen(SplashScreen())
@@ -503,6 +496,28 @@ class GridLayoutTest(App):
         finally:
             cursor.close()
             conn.close()
+
+    # class Header(Static):
+    #     """Header widget for the dashboard."""
+    #
+    #     def __init__(self, **kwargs):
+    #         super().__init__(**kwargs)
+    #         self.clock_visible = True
+    #         self.time_format = "%Y-%m-%d %H:%M:%S"
+    #         self.title = "Demonlab Dashboard"
+    #         self.subtitle = "Synapse and Sysadmin"
+    #         self.title_style = "bold #0A9396"
+    #         self.subtitle_style = "bold #0A9396"
+    #         self.clock_style = "bold #0A9396"
+    #
+    #     def render(self) -> str:
+    #         """Render the header with title, subtitle, and clock."""
+    #         if self.clock_visible:
+    #             current_time = datetime.now(timezone.utc).strftime(self.time_format)
+    #             return f"[{self.title_style}]{self.title}[/] - [{self.subtitle_style}]{self.subtitle}[/] - [{self.clock_style}]{current_time}[/]"
+    #         else:
+    #             return f"[{self.title_style}]{self.title}[/] - [{self.subtitle_style}]{self.subtitle}[/]"
+    #
 
     def action_null(self) -> None:
         """No-op action for 'b' key (beep)."""
