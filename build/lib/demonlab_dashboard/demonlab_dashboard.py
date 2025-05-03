@@ -4,7 +4,11 @@ import logging
 from datetime import datetime, timezone
 
 import psycopg2
+from about import AboutScreen
+from clock import ClockWidget
 from psycopg2 import extensions
+from services_data_table import ServiceStatusWidget
+from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import (Horizontal, HorizontalScroll, Vertical,
@@ -14,11 +18,6 @@ from textual.widgets import (Button, Digits, Footer, Header, Label,
                              LoadingIndicator, Placeholder, ProgressBar, Rule,
                              Static)
 from textual_serve.server import Server
-
-from about import AboutScreen
-from clock import ClockWidget
-from services_data_table import ServiceStatusWidget
-from startup import SplashScreen
 
 # Configure logging
 logging.basicConfig(
