@@ -60,7 +60,7 @@ class GridLayoutTest(App):
         "busy": "🟡",
         "unavailable": "🔴",
         "unknown": "⚪",
-    }
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
