@@ -8,13 +8,22 @@ import psycopg2
 from psycopg2 import extensions
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import (Horizontal, HorizontalScroll, Vertical,
-                                VerticalScroll)
+from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
 from textual.reactive import Reactive
 from textual.screen import Screen
-from textual.widgets import (Button, Digits, Footer, Header, Label,
-                             LoadingIndicator, Placeholder, ProgressBar, Rule,
-                             Sparkline, Static)
+from textual.widgets import (
+    Button,
+    Digits,
+    Footer,
+    Header,
+    Label,
+    LoadingIndicator,
+    Placeholder,
+    ProgressBar,
+    Rule,
+    Sparkline,
+    Static,
+)
 from textual_serve.server import Server
 
 import button_action
@@ -544,6 +553,7 @@ class GridLayoutTest(App):
 def main():
     app = GridLayoutTest()
     app.run()
+
 
 if __name__ == "__main__":
     main()
