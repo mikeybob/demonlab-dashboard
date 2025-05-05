@@ -4,13 +4,8 @@ import logging
 from datetime import datetime, timezone
 from random import Random
 
-import button_action
 import psycopg2
-from about import AboutScreen
-from clock import ClockWidget
 from psycopg2 import extensions
-from services_data_table import ServiceStatusWidget
-from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import (Horizontal, HorizontalScroll, Vertical,
@@ -22,6 +17,12 @@ from textual.widgets import (Button, Digits, Footer, Header, Label,
                              Sparkline, Static)
 from textual_serve.server import Server
 
+import button_action
+from about import AboutScreen
+from clock import ClockWidget
+from services_data_table import ServiceStatusWidget
+from startup import SplashScreen
+
 # Configure logging
 logging.basicConfig(
     filename="demonlab_dashboard.log",
@@ -29,7 +30,6 @@ logging.basicConfig(
     format="%(asctime)s - %(message)s",
     filemode="a",
 )
-
 
 server = Server("python -m textual")
 
@@ -522,28 +522,6 @@ class GridLayoutTest(App):
             cursor.close()
             conn.close()
 
-    # class Header(Static):
-    #     """Header widget for the dashboard."""
-    #
-    #     def __init__(self, **kwargs):
-    #         super().__init__(**kwargs)
-    #         self.clock_visible = True
-    #         self.time_format = "%Y-%m-%d %H:%M:%S"
-    #         self.title = "Demonlab Dashboard"
-    #         self.subtitle = "Synapse and Sysadmin"
-    #         self.title_style = "bold #0A9396"
-    #         self.subtitle_style = "bold #0A9396"
-    #         self.clock_style = "bold #0A9396"
-    #
-    #     def render(self) -> str:
-    #         """Render the header with title, subtitle, and clock."""
-    #         if self.clock_visible:
-    #             current_time = datetime.now(timezone.utc).strftime(self.time_format)
-    #             return f"[{self.title_style}]{self.title}[/] - [{self.subtitle_style}]{self.subtitle}[/] - [{self.clock_style}]{current_time}[/]"
-    #         else:
-    #             return f"[{self.title_style}]{self.title}[/] - [{self.subtitle_style}]{self.subtitle}[/]"
-    #
-
     def action_null(self) -> None:
         """No-op action for 'b' key (beep)."""
         return
@@ -566,7 +544,6 @@ class GridLayoutTest(App):
 def main():
     app = GridLayoutTest()
     app.run()
-
 
 if __name__ == "__main__":
     main()
