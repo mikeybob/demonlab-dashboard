@@ -14,7 +14,6 @@ import demonlab_dashboard.database as db
 
 
 class ButtonActions:
-
     @on(Button.Pressed)
     def but01_action(self) -> None:
         """

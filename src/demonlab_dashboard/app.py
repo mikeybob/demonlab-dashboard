@@ -1,8 +1,7 @@
-from textual.app import App, ComposeResult
-from textual.widgets import Button, Static
-
 from database import Database
 from system_health import SystemHealthPanel
+from textual.app import App, ComposeResult
+from textual.widgets import Button, Static
 
 # Import other necessary modules
 
