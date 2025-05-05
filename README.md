@@ -31,7 +31,8 @@ pip install demonlab-dashboard
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/issue-metrics.yml?style=for-the-badge&label=Issue%20Metrics%20Monthly&color=darkgreen) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mikeybob/demonlab-dashboard/issue-metrics-mtd.yml?style=for-the-badge&label=Issue%20Metrics%20Month%20To%20Date&color=darkgreen) 
 
 ![Change Demon Message to Community Changelog](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/mtx_msg.yml/badge.svg)
-
+[![Trunk Scan for TODO Tags](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/todos-to-issue.yml/badge.svg?branch=trunk)](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/todos-to-issue.yml)
+[![Dev  Scan for TODO Tags](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/todos-to-issue.yml/badge.svg?branch=dev)](https://github.com/mikeybob/demonlab-dashboard/actions/workflows/todos-to-issue.yml)
 
 
 ## License
