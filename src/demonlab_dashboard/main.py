@@ -4,13 +4,8 @@ import logging
 from datetime import datetime, timezone
 from random import Random
 
-import button_action
 import psycopg2
-from about import AboutScreen
-from clock import ClockWidget
 from psycopg2 import extensions
-from services_data_table import ServiceStatusWidget
-from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import (Horizontal, HorizontalScroll, Vertical,
@@ -19,8 +14,14 @@ from textual.reactive import Reactive
 from textual.screen import Screen
 from textual.widgets import (Button, Digits, Footer, Header, Label,
                              LoadingIndicator, Placeholder, ProgressBar, Rule,
-                             Static)
+                             Sparkline, Static)
 from textual_serve.server import Server
+
+import button_action
+from about import AboutScreen
+from clock import ClockWidget
+from services_data_table import ServiceStatusWidget
+from startup import SplashScreen
 
 # Configure logging
 logging.basicConfig(
@@ -59,7 +60,7 @@ class GridLayoutTest(App):
         "busy": "🟡",
         "unavailable": "🔴",
         "unknown": "⚪",
-
+    }
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -389,30 +390,41 @@ class GridLayoutTest(App):
             else:
                 # Empty panel placeholder
                 # yield Label("", id=f"User{index+1}", classes="box empty_box")
+                # trying some widgets with sample data here.
                 yield Vertical(
                     Label(
                         "",
                         id=f"User{index+1}",
                     ),
                     LoadingIndicator(id="epty-loading-indicator"),
+                    Rule(),
                     classes="box empty_box",
                 )
         # End of user panels
 
         # System health box
-        yield Static("[b]General System Health[/b]", classes="box", id="gsh")
+        yield Static(
+            "[b]General System Health[/b]",
+            classes="box",
+            id="gsh",
+        )
+
         # System health end.
 
         #
-        yield Horizontal(ClockWidget(), id="clockface")
+        yield Vertical(Rule(), ClockWidget(), Rule(), id="clockface")
         #
 
         # System misc. box
         yield Vertical(
-            Static("[b]System Misc.[/b]"),
+            Static("[center] [b]System Misc.[/b][/center]"),
+            Rule(),
             LoadingIndicator(id="loading-indicator"),
-            classes="box",
+            LoadingIndicator(id="loading-indicator1"),
+            LoadingIndicator(id="loading-indicator2"),
+            Rule(),
             id="msc",
+            classes="mscbox",
         )
         # SMisc end.
 

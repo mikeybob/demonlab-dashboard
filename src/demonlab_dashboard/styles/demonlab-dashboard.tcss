@@ -54,7 +54,7 @@ Screen {
     background: black;
     height: 1fr;
     border: solid goldenrod;
-    content-align: center top;
+    content-align: center middle;
     margin: 1 0 0 0;
 }
 
@@ -62,19 +62,49 @@ Screen {
 #msc {
     layout: vertical;
     column-span: 1;
-    background: white 10%;
+    background: black;
     height: 1fr;
     width: 1fr;
     border: solid blue;
-    content-align: center top;
-    align: center top;
+    content-align: center middle;
+    align: center middle;
+    visibility: visible;
+    margin: 1 0 0 0;
+}
+
+#mscbox {
+    content-align: center middle;
 }
 
 #msc > #loading-indicator {
-    color: black;
-    border: none white;
+    color: goldenrod;
     width: auto;
+    background: black;
     height: auto;
+    align: right middle;
+    content-align:  right middle;
+    padding: 0;
+    margin: 0 1 0 5;
+}
+#msc > #loading-indicator1 {
+    color: royalblue;
+    width: auto;
+    background: black;
+    height: auto;
+    align: center middle;
+    content-align:  left top;
+    padding: 0;
+    margin: 0 1 0 20;
+}
+#msc > #loading-indicator2 {
+    color: lime;
+    width: auto;
+    background: black;
+    height: auto;
+    align: center middle;
+    content-align:  center middle;
+    padding: 0;
+    margin: 0 1 0 35;
 }
 
 Header {
@@ -106,10 +136,10 @@ Horizontal {
     width: 1fr;
     height: 1fr;
     background: black;
-    border: tall white;
+    border: inner white;
     content-align: center middle;
-    margin: 1 1 0 1;
-    padding: 1;
+    margin: 1 0 0 1;
+    padding: 2;
 }
 
 Button {
@@ -149,9 +179,9 @@ Button {
 ClockWidget {
     align: center middle;
     content-align: center middle;
-    column-span: 4;
-    height: 100%;
-    background: black;
+    column-span: 1;
+    height: auto;
+    background: blue 30%;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -161,7 +191,7 @@ ClockWidget {
 
 #clockface {
      border: solid firebrick;
-     align: left middle;
+     align: center middle;
      content-align: center middle;
      background: black;
      column-span: 1;
@@ -177,9 +207,8 @@ ClockWidget {
      align: center middle;
      content-align: center middle;
      color: white;
-     background: black;
      border: none white;
-     column-span: 2;
+     column-span: 1;
      width: auto;
      height: auto;
      margin: 0;
