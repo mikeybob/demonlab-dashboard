@@ -2,27 +2,22 @@ import asyncio
 import json
 import logging
 from datetime import datetime, timezone
+from random import Random
 
 import psycopg2
 from psycopg2 import extensions
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
+from textual.containers import (Horizontal, HorizontalScroll, Vertical,
+                                VerticalScroll)
+from textual.reactive import Reactive
 from textual.screen import Screen
-from textual.widgets import (
-    Button,
-    Digits,
-    Footer,
-    Header,
-    Label,
-    LoadingIndicator,
-    Placeholder,
-    ProgressBar,
-    Rule,
-    Static,
-)
+from textual.widgets import (Button, Digits, Footer, Header, Label,
+                             LoadingIndicator, Placeholder, ProgressBar, Rule,
+                             Static)
 from textual_serve.server import Server
 
+import button_action
 from about import AboutScreen
 from clock import ClockWidget
 from services_data_table import ServiceStatusWidget
@@ -48,10 +43,10 @@ class GridLayoutTest(App):
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
         Binding(
-            key="question_mark",
+            key="FN1",
             action="help",
             description="Show help screen",
-            key_display="?",
+            key_display="Fn1",
         ),
         Binding(key="b", action="null", description="Beep"),
         Binding(key="p", action="null2", description="Plop"),
@@ -293,8 +288,10 @@ class GridLayoutTest(App):
                     minutes_idle = gap.total_seconds() / 60
                     if minutes_idle < 5:
                         fade_color = "lime"
-                    elif minutes_idle < 30:
+                    elif minutes_idle < 15:
                         fade_color = "#ffd700"
+                    elif minutes_idle < 30:
+                        fade_color = "royalblue"
                     elif minutes_idle < 120:
                         fade_color = "#888888"
                     else:
@@ -326,7 +323,7 @@ class GridLayoutTest(App):
             widget.border = ("heavy", fade_color)
 
     def compose(self) -> ComposeResult:
-        yield Header()
+        yield Header(show_clock=True)
         yield Footer()
         # Yield user panels (two rows of 6)
         actual_count = len(self.displayed_users)
@@ -351,6 +348,8 @@ class GridLayoutTest(App):
                             fade_color = "lime"
                         elif minutes_idle < 30:
                             fade_color = "#ffd700"
+                        elif minutes_idle < 30:
+                            fade_color = "royalblue"
                         elif minutes_idle < 120:
                             fade_color = "#888888"
                         else:
@@ -390,7 +389,15 @@ class GridLayoutTest(App):
                 yield user_label
             else:
                 # Empty panel placeholder
-                yield Label("", id=f"User{index+1}", classes="box empty_box")
+                # yield Label("", id=f"User{index+1}", classes="box empty_box")
+                yield Vertical(
+                    Label(
+                        "",
+                        id=f"User{index+1}",
+                    ),
+                    LoadingIndicator(id="epty-loading-indicator"),
+                    classes="box empty_box",
+                )
         # End of user panels
 
         # System health box
@@ -401,6 +408,15 @@ class GridLayoutTest(App):
         yield Horizontal(ClockWidget(), id="clockface")
         #
 
+        # System misc. box
+        yield Vertical(
+            Static("[b]System Misc.[/b]"),
+            LoadingIndicator(id="loading-indicator"),
+            classes="box",
+            id="msc",
+        )
+        # SMisc end.
+
         # New code for services panel
         yield ServiceStatusWidget(
             services=[
@@ -410,6 +426,7 @@ class GridLayoutTest(App):
                 "postgresql",
                 "dnsmasq",
                 "unbound",
+                "tftpd-hpa",
                 "redis",
             ],
             username="mike",
@@ -418,20 +435,18 @@ class GridLayoutTest(App):
         )
         # end on new panel code
 
-        # System misc. box
-        yield Static("[b]System Misc.[/b]", classes="box", id="msc")
-        # SMisc end.
-
         # Action buttons
         yield Horizontal(
-            Button("DF Report", id="but01"),
-            Button("Scrub Stat", id="but02"),
-            Button("ssh FF1", id="but03"),
-            Button("ssh FN2", id="but04"),
-            Button("ssh rpi05", id="but05"),
-            Button("All Stop", id="but06"),
-            Button("Primary", id="but07"),
-            Button("Blowjob", id="but08"),
+            Button("NUKE Resync", variant="warning", id="but01"),
+            Button("Scrub Stats", variant="warning", id="but02"),
+            Button("ssh FF1", variant="warning", id="but03"),
+            Button("ssh FN2", variant="warning", id="but04"),
+            Button("ssh rpi05", variant="warning", id="but05"),
+            Button("ssh ubu", variant="warning", id="but06"),
+            Button("Primary", variant="warning", id="but07"),
+            Button("Blowjob", variant="warning", id="but08"),
+            Button("Blowjob", variant="warning", id="but09"),
+            Button(" ☢ Full Stop  ☢", variant="warning", id="but10"),
         )
 
     async def on_mount(self):

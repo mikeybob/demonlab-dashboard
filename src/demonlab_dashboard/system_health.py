@@ -1,5 +1,6 @@
-from database import Database  # Ensure Database module is imported
 from textual.widgets import Static
+
+from database import Database  # Ensure Database module is imported
 
 
 class SystemHealthPanel(Static):
