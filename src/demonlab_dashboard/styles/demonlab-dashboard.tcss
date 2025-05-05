@@ -48,6 +48,10 @@ Screen {
     border-title-style: underline;
 }
 
+#gsh > .healthrule {
+    color: red;
+}
+
 #service-status {
     column-span: 3;
     row-span: 2;
