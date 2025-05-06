@@ -4,33 +4,23 @@ import logging
 from datetime import datetime, timezone
 from random import Random
 
-import psycopg2
-from psycopg2 import extensions
-from textual.app import App, ComposeResult
-from textual.binding import Binding
-from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
-from textual.reactive import Reactive
-from textual.screen import Screen
-from textual.widgets import (
-    Button,
-    Digits,
-    Footer,
-    Header,
-    Label,
-    LoadingIndicator,
-    Placeholder,
-    ProgressBar,
-    Rule,
-    Sparkline,
-    Static,
-)
-from textual_serve.server import Server
-
 import button_action
+import psycopg2
 from about import AboutScreen
 from clock import ClockWidget
+from psycopg2 import extensions
 from services_data_table import ServiceStatusWidget
 from startup import SplashScreen
+from textual.app import App, ComposeResult
+from textual.binding import Binding
+from textual.containers import (Horizontal, HorizontalScroll, Vertical,
+                                VerticalScroll)
+from textual.reactive import Reactive
+from textual.screen import Screen
+from textual.widgets import (Button, Digits, Footer, Header, Label,
+                             LoadingIndicator, Placeholder, ProgressBar, Rule,
+                             Sparkline, Static)
+from textual_serve.server import Server
 
 # Configure logging
 logging.basicConfig(
