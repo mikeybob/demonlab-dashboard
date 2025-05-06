@@ -11,12 +11,20 @@ from services_data_table import ServiceStatusWidget
 from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import (Horizontal, HorizontalScroll, Vertical,
-                                VerticalScroll)
+from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
 from textual.screen import Screen
-from textual.widgets import (Button, Digits, Footer, Header, Label,
-                             LoadingIndicator, Placeholder, ProgressBar, Rule,
-                             Static)
+from textual.widgets import (
+    Button,
+    Digits,
+    Footer,
+    Header,
+    Label,
+    LoadingIndicator,
+    Placeholder,
+    ProgressBar,
+    Rule,
+    Static,
+)
 from textual_serve.server import Server
 
 # Configure logging

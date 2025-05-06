@@ -45,3 +45,6 @@ start = "demonlab_dashboard.main:main"
 Documentation = "https://github.com/demonglobal/demonlab-dashboard#readme"
 Issues = "https://github.com/demonglobal/demonlab-dashboard/issues"
 Source = "https://github.com/demonglobal/demonlab-dashboard"
+
+[tool.isort]
+profile = "black"
