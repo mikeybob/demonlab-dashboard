@@ -6,7 +6,7 @@ asyncio==3.4.3
     # via demonlab-dashboard (pyproject.toml)
 asyncpg==0.30.0
     # via demonlab-dashboard (pyproject.toml)
-datetime==4.3
+datetime==5.5
     # via demonlab-dashboard (pyproject.toml)
 linkify-it-py==2.0.3
     # via markdown-it-py
