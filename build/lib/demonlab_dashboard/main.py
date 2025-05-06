@@ -2,7 +2,9 @@ import asyncio
 import json
 import logging
 from datetime import datetime, timezone
+from random import Random
 
+import button_action
 import psycopg2
 from about import AboutScreen
 from clock import ClockWidget
@@ -11,20 +13,13 @@ from services_data_table import ServiceStatusWidget
 from startup import SplashScreen
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, HorizontalScroll, Vertical, VerticalScroll
+from textual.containers import (Horizontal, HorizontalScroll, Vertical,
+                                VerticalScroll)
+from textual.reactive import Reactive
 from textual.screen import Screen
-from textual.widgets import (
-    Button,
-    Digits,
-    Footer,
-    Header,
-    Label,
-    LoadingIndicator,
-    Placeholder,
-    ProgressBar,
-    Rule,
-    Static,
-)
+from textual.widgets import (Button, Digits, Footer, Header, Label,
+                             LoadingIndicator, Placeholder, ProgressBar, Rule,
+                             Sparkline, Static)
 from textual_serve.server import Server
 
 # Configure logging
@@ -35,20 +30,7 @@ logging.basicConfig(
     filemode="a",
 )
 
-
 server = Server("python -m textual")
-
-
-# class Anomoly(Screen):
-#     pass
-#
-#
-# class Alerts(Screen):
-#     pass
-#
-#
-# class Misc(Screen):
-#     pass
 
 
 class GridLayoutTest(App):
@@ -59,10 +41,10 @@ class GridLayoutTest(App):
     BINDINGS = [
         Binding(key="q", action="quit", description="Quit the app"),
         Binding(
-            key="question_mark",
+            key="FN1",
             action="help",
             description="Show help screen",
-            key_display="?",
+            key_display="Fn1",
         ),
         Binding(key="b", action="null", description="Beep"),
         Binding(key="p", action="null2", description="Plop"),
@@ -304,8 +286,10 @@ class GridLayoutTest(App):
                     minutes_idle = gap.total_seconds() / 60
                     if minutes_idle < 5:
                         fade_color = "lime"
-                    elif minutes_idle < 30:
+                    elif minutes_idle < 15:
                         fade_color = "#ffd700"
+                    elif minutes_idle < 30:
+                        fade_color = "royalblue"
                     elif minutes_idle < 120:
                         fade_color = "#888888"
                     else:
@@ -337,8 +321,8 @@ class GridLayoutTest(App):
             widget.border = ("heavy", fade_color)
 
     def compose(self) -> ComposeResult:
+        yield Header(show_clock=True)
         yield Footer()
-        yield Header()
         # Yield user panels (two rows of 6)
         actual_count = len(self.displayed_users)
         for index in range(12):
@@ -362,6 +346,8 @@ class GridLayoutTest(App):
                             fade_color = "lime"
                         elif minutes_idle < 30:
                             fade_color = "#ffd700"
+                        elif minutes_idle < 30:
+                            fade_color = "royalblue"
                         elif minutes_idle < 120:
                             fade_color = "#888888"
                         else:
@@ -401,16 +387,44 @@ class GridLayoutTest(App):
                 yield user_label
             else:
                 # Empty panel placeholder
-                yield Label("", id=f"User{index+1}", classes="box empty_box")
+                # yield Label("", id=f"User{index+1}", classes="box empty_box")
+                # trying some widgets with sample data here.
+                yield Vertical(
+                    Label(
+                        "",
+                        id=f"User{index+1}",
+                    ),
+                    LoadingIndicator(id="epty-loading-indicator"),
+                    Rule(),
+                    classes="box empty_box",
+                )
         # End of user panels
 
         # System health box
-        yield Static("[b]General System Health[/b]", classes="box", id="gsh")
+        yield Static(
+            "[b]General System Health[/b]",
+            classes="box",
+            id="gsh",
+        )
+
         # System health end.
 
         #
-        yield Horizontal(ClockWidget(), id="clockface")
+        yield Vertical(Rule(), ClockWidget(), Rule(), id="clockface")
         #
+
+        # System misc. box
+        yield Vertical(
+            Static("[center] [b]System Misc.[/b][/center]"),
+            Rule(),
+            LoadingIndicator(id="loading-indicator"),
+            LoadingIndicator(id="loading-indicator1"),
+            LoadingIndicator(id="loading-indicator2"),
+            Rule(),
+            id="msc",
+            classes="mscbox",
+        )
+        # SMisc end.
 
         # New code for services panel
         yield ServiceStatusWidget(
@@ -421,6 +435,7 @@ class GridLayoutTest(App):
                 "postgresql",
                 "dnsmasq",
                 "unbound",
+                "tftpd-hpa",
                 "redis",
             ],
             username="mike",
@@ -429,25 +444,19 @@ class GridLayoutTest(App):
         )
         # end on new panel code
 
-        # System misc. box
-        yield Static("[b]System Misc.[/b]", classes="box", id="msc")
-        # SMisc end.
-
         # Action buttons
         yield Horizontal(
-            Button("DF Report", id="but01"),
-            Button("Scrub Stat", id="but02"),
-            Button("ssh FF1", id="but03"),
-            Button("ssh FN2", id="but04"),
-            Button("ssh rpi05", id="but05"),
-            Button("All Stop", id="but06"),
-            Button("Primary", id="but07"),
-            Button("Blowjob", id="but08"),
+            Button("NUKE Resync", variant="warning", id="but01"),
+            Button("Scrub Stats", variant="warning", id="but02"),
+            Button("ssh FF1", variant="warning", id="but03"),
+            Button("ssh FN2", variant="warning", id="but04"),
+            Button("ssh rpi05", variant="warning", id="but05"),
+            Button("ssh ubu", variant="warning", id="but06"),
+            Button("Primary", variant="warning", id="but07"),
+            Button("Blowjob", variant="warning", id="but08"),
+            Button("Blowjob", variant="warning", id="but09"),
+            Button(" ☢ Full Stop  ☢", variant="warning", id="but10"),
         )
-
-    # def compose(self) -> ComposeResult:
-    #    yield Header()
-    #    yield Footer()
 
     async def on_mount(self):
         # Show splash screen initially, fade-in effect clearly working

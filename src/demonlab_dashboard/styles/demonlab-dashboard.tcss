@@ -115,9 +115,32 @@ Header {
     dock: top;
     height: 5;
     content-align: center middle;
-    border: tall white;
-    background: white 5%;
+    align: center middle;
+    border: double white;
+    background: black;
     color: white;
+}
+
+Header > HeaderClock {
+    color: red;
+    text-style: bold;
+    background: transparent;
+    border: heavy red;
+    width: 20;
+    align: center middle;
+    content-align: center middle;
+
+}
+
+Header > HeaderTitle {
+    color: white;
+    column-span: 1;
+    text-style: bold;
+    background: transparent;
+    border: none red;
+    height: 3;
+    align: center middle;
+    content-align: center middle;
 }
 
 Footer {
@@ -133,23 +156,26 @@ Horizontal {
     layout: grid;
     box-sizing: content-box;
     grid-size: 5;
-    grid-gutter: 1 2;
+    grid-gutter: 1;
     grid-rows: 1fr;
     grid-columns: 1fr;
     column-span: 3;
     width: 1fr;
     height: 1fr;
     background: black;
-    border: inner white;
+    border: tall white;
     content-align: center middle;
     margin: 1 0 0 1;
-    padding: 2;
+    padding: 1 0 1 0;
 }
 
 Button {
     color: auto;
+    content-align: center middle;
+    align: center middle;
     margin: 0;
-    box-sizing: content-box;
+    height: 6;
+    box-sizing: border-box;
     width: 25;
     border: round blue;
     padding: 0;
