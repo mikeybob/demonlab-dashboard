@@ -30,3 +30,5 @@ src/demonlab_dashboard/demonlab-dashboard.py-bu
 src/demonlab_dashboard/temp/
 
 src/demonlab_dashboard.egg-info/
+
+build/
