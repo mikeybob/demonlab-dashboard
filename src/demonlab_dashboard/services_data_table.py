@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Service Status Widget for Textual Dashboard"""
+import datetime
 import subprocess
 from typing import List
 
@@ -50,7 +51,9 @@ class ServiceStatusWidget(Widget):
         ]
         self.table = DataTable()
         self.table.cursor_type = "row"
-        self.table.add_columns("Service", "Status", "Host")
+        self.table.add_columns(
+            "Service", "Status", "Host", "Last Checked", "Type", "Additional Info"
+        )
         self.table.zebra_styles = True
 
     def on_mount(self) -> None:
@@ -62,7 +65,7 @@ class ServiceStatusWidget(Widget):
         self.table.clear()
         for checker in self.checkers:
             status = "active" if checker.is_service_active() else "inactive"
-            color = "green" if status == "active" else "red"
+            color = "#00ff00" if status == "active" else "#ff0000"
             self.table.add_row(
                 checker.service_name,
                 f"[{color}]{status}[/]",

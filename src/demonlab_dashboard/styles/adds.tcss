@@ -68,6 +68,7 @@ Header {
     border: tall white;
     background: white 5%;
     color: white;
+    show_clock: False;
 }
 
 Footer {
@@ -335,29 +336,29 @@ ServiceStatusWidget > DataTable {
     background: $surface;
     border: round $primary;
     padding: 0;
-    
+
     /* Zebra stripes */
     zebra_stripes: True;
     zebra_color: $accent 15%;
-    
+
     /* Header */
     > .datatable--header {
         background: $primary;
         color: $text;
         text-style: bold italic;
     }
-    
+
     /* Cells */
     > .datatable--cell {
         padding: 0 1;
     }
-    
+
     /* Status column specific styling */
     > .datatable--cell:nth-child(2) {
         text-align: center;
         width: 10;
     }
-    
+
     /* Hover effects */
     > .datatable--hover {
         background: $accent 10%;

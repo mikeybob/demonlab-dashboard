@@ -1,5 +1,5 @@
 from database import Database  # Ensure Database module is imported
-from textual.widgets import Static
+from textual.widgets import Rule, Static
 
 
 class SystemHealthPanel(Static):
@@ -7,7 +7,7 @@ class SystemHealthPanel(Static):
         label, next_datapoint = await self.fetch_health_data()
         self.update(
             f"[b]General System Health[/b]\n{label}:[green bold]{next_datapoint}[/green bold]"
-        )
+        ),
 
     async def fetch_health_data(self):
         query = """

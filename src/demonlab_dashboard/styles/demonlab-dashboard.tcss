@@ -25,6 +25,10 @@ Screen {
     border: dashed white 10%;
 }
 
+.empty_box > #epty-loading-indicator {
+    color: lime;
+}
+
 #opts {
     column-span: 1;
     background: transparent;
@@ -34,7 +38,7 @@ Screen {
 }
 
 #gsh {
-    column-span: 2;
+    column-span: 1;
     background: transparent;
     color: white;
     height: 1fr;
@@ -44,31 +48,99 @@ Screen {
     border-title-style: underline;
 }
 
+#gsh > .healthrule {
+    color: red;
+}
+
 #service-status {
-    column-span: 2;
+    column-span: 3;
     row-span: 2;
     background: black;
     height: 1fr;
-    border: solid white;
-    content-align: center top;
+    border: solid goldenrod;
+    content-align: center middle;
     margin: 1 0 0 0;
 }
 
+
 #msc {
+    layout: vertical;
     column-span: 1;
-    background: transparent;
+    background: black;
     height: 1fr;
-    border: solid white;
-    content-align: center top;
+    width: 1fr;
+    border: solid blue;
+    content-align: center middle;
+    align: center middle;
+    visibility: visible;
+    margin: 1 0 0 0;
+}
+
+#mscbox {
+    content-align: center middle;
+}
+
+#msc > #loading-indicator {
+    color: goldenrod;
+    width: auto;
+    background: black;
+    height: auto;
+    align: right middle;
+    content-align:  right middle;
+    padding: 0;
+    margin: 0 1 0 5;
+}
+#msc > #loading-indicator1 {
+    color: royalblue;
+    width: auto;
+    background: black;
+    height: auto;
+    align: center middle;
+    content-align:  left top;
+    padding: 0;
+    margin: 0 1 0 20;
+}
+#msc > #loading-indicator2 {
+    color: lime;
+    width: auto;
+    background: black;
+    height: auto;
+    align: center middle;
+    content-align:  center middle;
+    padding: 0;
+    margin: 0 1 0 35;
 }
 
 Header {
     dock: top;
     height: 5;
     content-align: center middle;
-    border: tall white;
-    background: white 5%;
+    align: center middle;
+    border: double white;
+    background: black;
     color: white;
+}
+
+Header > HeaderClock {
+    color: red;
+    text-style: bold;
+    background: transparent;
+    border: heavy red;
+    width: 20;
+    align: center middle;
+    content-align: center middle;
+
+}
+
+Header > HeaderTitle {
+    color: white;
+    column-span: 1;
+    text-style: bold;
+    background: transparent;
+    border: none red;
+    height: 3;
+    align: center middle;
+    content-align: center middle;
 }
 
 Footer {
@@ -83,35 +155,40 @@ Footer {
 Horizontal {
     layout: grid;
     box-sizing: content-box;
-    grid-size: 4;
+    grid-size: 5;
     grid-gutter: 1;
     grid-rows: 1fr;
     grid-columns: 1fr;
-    column-span: 2;
+    column-span: 3;
     width: 1fr;
     height: 1fr;
     background: black;
-    border: outer white;
+    border: tall white;
     content-align: center middle;
-    margin: 0;
-    padding: 1 0 0 0;
+    margin: 1 0 0 1;
+    padding: 1 0 1 0;
 }
 
 Button {
     color: auto;
+    content-align: center middle;
+    align: center middle;
     margin: 0;
-    box-sizing: content-box;
-    width: 20;
-    border: outer blue;
+    height: 6;
+    box-sizing: border-box;
+    width: 25;
+    border: round blue;
     padding: 0;
 }
 
-.button {
-    margin: 0 1;
-}
 
 .button:hover {
     text-style: bold;
+}
+
+
+#but01 {
+    margin: 0 0;
 }
 
 #output {
@@ -119,7 +196,8 @@ Button {
     column-span: 4;
     height: 10;
     padding: 1;
-    background: #2a2a2a;
+    background: firebrick;
+    color: white;
 }
 
 .title {
@@ -131,9 +209,9 @@ Button {
 ClockWidget {
     align: center middle;
     content-align: center middle;
-    column-span: 4;
-    height: 100%;
-    background: black;
+    column-span: 1;
+    height: auto;
+    background: blue 30%;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -143,7 +221,7 @@ ClockWidget {
 
 #clockface {
      border: solid firebrick;
-     align: left middle;
+     align: center middle;
      content-align: center middle;
      background: black;
      column-span: 1;
@@ -159,9 +237,8 @@ ClockWidget {
      align: center middle;
      content-align: center middle;
      color: white;
-     background: black;
      border: none white;
-     column-span: 2;
+     column-span: 1;
      width: auto;
      height: auto;
      margin: 0;
@@ -274,7 +351,7 @@ SplashScreen {
 #splash-text {
      content-align: center middle;
      align: center bottom;
-     border: none red;
+     border: round red;
      margin: 0;
      padding: 0;
      height: auto;
@@ -296,7 +373,103 @@ SplashScreen {
      align: center middle;
      column-span: 4;
      row-span: 5;
-     border: thick blue;
+     border: round blue;
 }
 
-# These might be unused depending on what is correct in about.py
+
+.compact-table {
+    height: auto;
+    max-height: 10;
+}
+
+DataTable > .datatable--header > .datatable--header-cell
+
+/* Custom table style */
+ServiceStatusWidget > DataTable {
+    /* Basic styling */
+    background: transparent;
+    border: round $primary;
+    padding: 0;
+
+
+    /* Header */
+ServiceStatusWidget    > .datatable--header {
+        background: $primary;
+        color: $text;
+        text-style: bold italic;
+    }
+
+    /* Cells */
+ServiceStatusWidget  > .datatable--cell {
+        padding: 0 1;
+    }
+
+
+    /* Hover effects */
+ServiceStatusWidget   > .datatable--hover {
+        background: $accent 10%;
+    }
+}
+
+/* Apply to tables with specific classes */
+DataTable.small-table {
+    width: 50%;
+    height: 10;
+}
+
+#DataTable {
+    background: transparent;
+}
+
+#DataTable > .datatable--corner {
+    background: $primary;
+    color: $text;
+}
+
+#DataTable > .datatable--scrollbar {
+    background: $panel;
+}
+
+#DataTable > .datatable--scrollbar-thumb {
+    background: $primary;
+}
+
+/* Hover effects */
+#DataTable > .datatable--hover {
+    background: $accent 20%;
+}
+
+/* Selected row/cell */
+#DataTable > .datatable--cursor {
+    background: $accent;
+    color: $text;
+}
+
+/* All cells */
+#DataTable > .datatable--cell {
+    padding: 0 1;
+}
+
+#DataTable > .datatable--header {
+    background: $primary;
+    color: $text;
+    text-style: bold;
+    border-bottom: heavy $secondary;
+}
+
+#DataTable > .datatable--header-cell {
+    padding: 0 2;
+}
+/*
+#DataTable {
+    zebra_stripes: True;
+    zebra_color: $accent 50%;
+}
+*/
+/* Target the entire table */
+#DataTable {
+    background: $surface;
+    color: $text;
+    border: tall $primary;
+    padding: 1;
+}
