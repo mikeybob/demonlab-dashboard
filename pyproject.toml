@@ -22,7 +22,7 @@ dependencies = [
   "textual==3.2.0",
   "asyncio==3.4.3",
   "asyncpg==0.30.0",
-  "datetime==4.3.0",
+  "datetime==5.5",
   "psycopg2-binary",
   "rich>=14.0.0",
 ]
