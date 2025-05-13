@@ -1,5 +1,4 @@
 
-
 Screen {
     layout: grid;
     color: white;
@@ -7,7 +6,6 @@ Screen {
     grid-gutter: 1;
     grid-size: 6 4;
 }
-
 
 .box {
     height: 1fr;
@@ -57,11 +55,10 @@ Screen {
     row-span: 2;
     background: black;
     height: 1fr;
-    border: solid goldenrod;
+    border: solid #003049;
     content-align: center middle;
     margin: 1 0 0 0;
 }
-
 
 #msc {
     layout: vertical;
@@ -72,7 +69,6 @@ Screen {
     border: solid blue;
     content-align: center middle;
     align: center middle;
-    visibility: visible;
     margin: 1 0 0 0;
 }
 
@@ -80,35 +76,40 @@ Screen {
     content-align: center middle;
 }
 
+#msc > #mscruletop {}
+#msc > #mscrulebot {}
+
 #msc > #loading-indicator {
     color: goldenrod;
     width: auto;
     background: black;
     height: auto;
     align: right middle;
-    content-align:  right middle;
+    content-align: right middle;
     padding: 0;
-    margin: 0 1 0 5;
+    margin: 0 1 0 2;
 }
+
 #msc > #loading-indicator1 {
     color: royalblue;
     width: auto;
     background: black;
     height: auto;
     align: center middle;
-    content-align:  left top;
+    content-align: left top;
     padding: 0;
-    margin: 0 1 0 20;
+    margin: 0 1 0 12;
 }
+
 #msc > #loading-indicator2 {
     color: lime;
     width: auto;
     background: black;
     height: auto;
     align: center middle;
-    content-align:  center middle;
+    content-align: center middle;
     padding: 0;
-    margin: 0 1 0 35;
+    margin: 0 1 0 22;
 }
 
 Header {
@@ -116,20 +117,19 @@ Header {
     height: 5;
     content-align: center middle;
     align: center middle;
-    border: double white;
+    border: round white;
     background: black;
     color: white;
 }
 
 Header > HeaderClock {
-    color: red;
+    color: royalblue;
     text-style: bold;
     background: transparent;
-    border: heavy red;
+    border: round royalblue;
     width: 20;
     align: center middle;
     content-align: center middle;
-
 }
 
 Header > HeaderTitle {
@@ -148,47 +148,62 @@ Footer {
     height: 3;
     content-align: center middle;
     border: tall darkgray;
-    background: white 5%;
+    background: black;
     color: auto;
 }
 
 Horizontal {
     layout: grid;
+    align: center middle;
     box-sizing: content-box;
     grid-size: 5;
-    grid-gutter: 1;
+    grid-gutter: 0;
     grid-rows: 1fr;
     grid-columns: 1fr;
     column-span: 3;
     width: 1fr;
     height: 1fr;
-    background: black;
-    border: tall white;
+    background: darkblue 10%;
+    border: solid #003049;
     content-align: center middle;
-    margin: 1 0 0 1;
-    padding: 1 0 1 0;
-}
-
-Button {
-    color: auto;
-    content-align: center middle;
-    align: center middle;
     margin: 0;
-    height: 6;
-    box-sizing: border-box;
-    width: 25;
-    border: round blue;
     padding: 0;
 }
 
+#buttontabs {
+    border: none;
+    dock: top;
+    height: 2;
+    width: 100%;
+    align-horizontal: center;
+    background: darkred;
+    color: black;
+}
+
+#tabs-list {
+    dock: top;
+    color: black;
+}
+
+#buttontabs > Label {
+    color: white;
+}
+
+Button {
+    color: black;
+    content-align: center middle;
+    align: center middle;
+    margin: 1 0 0 0;
+    height: auto;
+    box-sizing: border-box;
+    width: 20;
+    border: solid black;
+    padding: 0;
+}
 
 .button:hover {
     text-style: bold;
-}
-
-
-#but01 {
-    margin: 0 0;
+    color: red;
 }
 
 #output {
@@ -220,205 +235,183 @@ ClockWidget {
 }
 
 #clockface {
-     border: solid firebrick;
-     align: center middle;
-     content-align: center middle;
-     background: black;
-     column-span: 1;
-     height: 1fr;
-     width: 100%;
-     color: firebrick;
-     padding: 0;
-     margin: 1 0 0 0;
-     box-sizing: content-box;
+    border: solid firebrick;
+    align: center middle;
+    content-align: center middle;
+    background: black;
+    column-span: 1;
+    height: 1fr;
+    width: 100%;
+    color: firebrick;
+    padding: 0;
+    margin: 1 0 0 0;
+    box-sizing: content-box;
 }
 
 #clock {
-     align: center middle;
-     content-align: center middle;
-     color: white;
-     border: none white;
-     column-span: 1;
-     width: auto;
-     height: auto;
-     margin: 0;
-     padding: 0;
-     box-sizing: content-box;
+    align: center middle;
+    content-align: center middle;
+    color: white;
+    border: none white;
+    column-span: 1;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
 }
 
 #Vertical {
-     background: green;
-     color: cyan;
+    background: green;
+    color: cyan;
 }
-
-
 
 #figletbox {
-     color: red;
-     layout: grid;
-     column-span: 3;
-     grid-size: 2;
-     grid-rows: 15;
-     grid-columns: 1fr;
-     width: 110;
-     height: 5;
-     color: red;
-     align: center top;
-     background: white 10%;
-     box-sizing: content-box;
-     border: double white;
-     padding: 0 0 0 5;
-     margin: 5 0 0 -40;
-
+    layout: grid;
+    column-span: 3;
+    grid-size: 2;
+    grid-rows: 15;
+    grid-columns: 1fr;
+    width: 110;
+    height: 5;
+    align: center top;
+    background: white 10%;
+    box-sizing: content-box;
+    border: double white;
+    padding: 0 0 0 5;
+    margin: 5 0 0 -40;
+    color: red;
 }
 
-
-# The box containing the figlet and about text
 #about-box {
-     color: red;
-     layout: grid;
-     column-span: 3;
-     grid-size: 2;
-     grid-rows: 15;
-     grid-columns: 1fr;
-     width: 110;
-     height: 5;
-     color: red;
-     align: center top;
-     background: white 10%;
-     box-sizing: content-box;
-     border: double white;
-     padding: 0 0 0 5;
-     margin: 5 0 0 -40;
-
+    /* The box containing the figlet and about text */
+    layout: grid;
+    column-span: 3;
+    grid-size: 2;
+    grid-rows: 15;
+    grid-columns: 1fr;
+    width: 110;
+    height: 5;
+    align: center top;
+    background: white 10%;
+    box-sizing: content-box;
+    border: double white;
+    padding: 0 0 0 5;
+    margin: 5 0 0 -40;
+    color: red;
 }
 
-# Text that the figlet is displaying
 .figlet-text {
-     border: dashed red;
-     background: gray;
-     layout: grid;
-     grid-size: 2 2;
-     grid-rows: 3;
-     grid-columns: 3;
-     column-span: 2;
-     height: 15;
-     width: 1fr;
-     box-sizing: content-box;
-     align: right top;
-     margin: 3;
-     padding: 1;
-     color: black;
+    border: dashed red;
+    background: gray;
+    layout: grid;
+    grid-size: 2 2;
+    grid-rows: 3;
+    grid-columns: 3;
+    column-span: 2;
+    height: 15;
+    width: 1fr;
+    box-sizing: content-box;
+    align: right top;
+    margin: 3;
+    padding: 1;
+    color: black;
 }
 
-# The regular text below the figlet
 .about-text {
-     layout: grid;
-     grid-size: 3 3;
-     grid-rows: 15;
-     grid-columns: 2;
-     column-span: 2;
-     height: 5;
-     width: 109;
-     row-span: 1;
-     padding: 1;
-     border: thick green;
-     color: red;
-     background: royalblue;
-     box-sizing: content-box;
-     align: right top;
-
+    layout: grid;
+    grid-size: 3 3;
+    grid-rows: 15;
+    grid-columns: 2;
+    column-span: 2;
+    height: 5;
+    width: 109;
+    row-span: 1;
+    padding: 1;
+    border: thick green;
+    color: red;
+    background: royalblue;
+    box-sizing: content-box;
+    align: right top;
 }
 
 SplashScreen {
-     align: center middle;
-     content-align: center middle;
+    align: center middle;
+    content-align: center middle;
 }
 
 #figlet1 {
-     column-span: 5;
-     width:  85%;
-     height: 40%;
-     align: center top;
-     background: black;
-     box-sizing: content-box;
-     border: none white;
-     padding: 0;
-     margin:  0;
-
+    column-span: 5;
+    width: 85%;
+    height: 40%;
+    align: center top;
+    background: black;
+    box-sizing: content-box;
+    border: none white;
+    padding: 0;
+    margin: 0;
 }
 
 #splash-text {
-     content-align: center middle;
-     align: center bottom;
-     border: round red;
-     margin: 0;
-     padding: 0;
-     height: auto;
-     width: auto;
-     column-span: 4;
-     row-span: 3;
-     margin: 0 2 0 0;
-     padding: 0 1 2 35;
+    content-align: center middle;
+    align: center bottom;
+    border: round red;
+    margin: 0 2 0 0;
+    padding: 0 1 2 35;
+    height: auto;
+    width: auto;
+    column-span: 4;
+    row-span: 3;
 }
 
 #splash-stack {
-     layout: grid;
-     grid-size: 4;
-     content-align: center top;
-     height: 50%;
-     width: 70%;
-     grid-rows: 3fr;
-     grid-columns: 1fr;
-     align: center middle;
-     column-span: 4;
-     row-span: 5;
-     border: round blue;
+    layout: grid;
+    grid-size: 4;
+    content-align: center top;
+    height: 50%;
+    width: 70%;
+    grid-rows: 3fr;
+    grid-columns: 1fr;
+    align: center middle;
+    column-span: 4;
+    row-span: 5;
+    border: round blue;
 }
-
 
 .compact-table {
     height: auto;
     max-height: 10;
 }
 
-DataTable > .datatable--header > .datatable--header-cell
-
-/* Custom table style */
 ServiceStatusWidget > DataTable {
-    /* Basic styling */
     background: transparent;
     border: round $primary;
     padding: 0;
-
-
-    /* Header */
-ServiceStatusWidget    > .datatable--header {
-        background: $primary;
-        color: $text;
-        text-style: bold italic;
-    }
-
-    /* Cells */
-ServiceStatusWidget  > .datatable--cell {
-        padding: 0 1;
-    }
-
-
-    /* Hover effects */
-ServiceStatusWidget   > .datatable--hover {
-        background: $accent 10%;
-    }
 }
 
-/* Apply to tables with specific classes */
+ServiceStatusWidget > .datatable--header {
+    background: $primary;
+    color: $text;
+}
+
+ServiceStatusWidget > .datatable--cell {
+    padding: 0 1;
+}
+
+ServiceStatusWidget > .datatable--hover {
+    background: $accent 50%;
+}
+
 DataTable.small-table {
     width: 50%;
     height: 10;
 }
 
 #DataTable {
-    background: transparent;
+    background: $surface;
+    color: $text;
+    border: tall #003049;
+    padding: 1;
 }
 
 #DataTable > .datatable--corner {
@@ -434,18 +427,15 @@ DataTable.small-table {
     background: $primary;
 }
 
-/* Hover effects */
 #DataTable > .datatable--hover {
     background: $accent 20%;
 }
 
-/* Selected row/cell */
 #DataTable > .datatable--cursor {
     background: $accent;
     color: $text;
 }
 
-/* All cells */
 #DataTable > .datatable--cell {
     padding: 0 1;
 }
@@ -459,17 +449,4 @@ DataTable.small-table {
 
 #DataTable > .datatable--header-cell {
     padding: 0 2;
-}
-/*
-#DataTable {
-    zebra_stripes: True;
-    zebra_color: $accent 50%;
-}
-*/
-/* Target the entire table */
-#DataTable {
-    background: $surface;
-    color: $text;
-    border: tall $primary;
-    padding: 1;
 }
