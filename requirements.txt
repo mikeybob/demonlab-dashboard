@@ -19,7 +19,7 @@ mdit-py-plugins==0.4.2
     # via markdown-it-py
 mdurl==0.1.2
     # via markdown-it-py
-platformdirs==4.3.7
+platformdirs==4.3.8
     # via textual
 pygments==2.19.1
     # via rich
