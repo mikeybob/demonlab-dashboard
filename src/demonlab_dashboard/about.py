@@ -9,6 +9,7 @@ from textual_pyfiglet import FigletWidget
 
 # TypeError: AboutScreen() compose() method returned an invalid result; 'NoneType' object is not iterable
 
+
 class AboutScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Dismiss")]
 
