@@ -8,7 +8,7 @@
 
 
 ### Build Tools:
-![Static Badge](https://img.shields.io/badge/black-black?style=for-the-badge&label=code-style&color=black) ![Static Badge](https://img.shields.io/badge/isort-black?style=for-the-badge&label=imports&labelColor=orangered&color=darkblue) ![Static Badge](https://img.shields.io/badge/Hatch-blue?style=for-the-badge&logo=egghead&labelColor=black&color=royalblue)
+![Static Badge](https://img.shields.io/badge/black-black?style=for-the-badge&label=code-style&color=black) ![Static Badge](https://img.shields.io/badge/isort-black?style=for-the-badge&label=imports&labelColor=orangered&color=darkblue)
 ----
 ### Misc:
 ![Matrix](https://img.shields.io/matrix/gitdev%3Ademonlab.net?server_fqdn=demonlab.net&style=for-the-badge&logo=matrix&logoColor=black&logoSize=auto&label=demonlab&labelColor=red) 
