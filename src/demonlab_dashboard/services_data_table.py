@@ -52,9 +52,19 @@ class ServiceStatusWidget(Widget):
         self.table = DataTable()
         self.table.cursor_type = "row"
         self.table.add_columns(
-            "Service", "Status", "Host", "Last Checked", "Type", "Additional Info"
+            "Service",
+            "Status",
+            "Host",
+            "Last ✔",
+            "Next ✔",
+            "Type",
+            "Additional Info",
         )
         self.table.zebra_styles = True
+        self.border_title = "Service Statuses [goldenrod]{hostname}[/goldenrod]".format(
+            hostname=hostname
+        )
+        self.border_title_align = "left, center"
 
     def on_mount(self) -> None:
         """Refresh statuses when widget is mounted."""
