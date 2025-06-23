@@ -21,7 +21,7 @@ mdurl==0.1.2
     # via markdown-it-py
 platformdirs==4.3.8
     # via textual
-pygments==2.19.1
+pygments==2.19.2
     # via rich
 pytz==2025.2
     # via datetime
