@@ -2,7 +2,7 @@
 Screen {
     layout: grid;
     color: white;
-    background: black;
+    background: #000020;
     grid-gutter: 1;
     grid-size: 6 4;
 }
@@ -21,6 +21,7 @@ Screen {
 
 .empty_box {
     border: dashed white 10%;
+    background: transparent;
 }
 
 .empty_box > #epty-loading-indicator {
@@ -40,7 +41,7 @@ Screen {
     background: transparent;
     color: white;
     height: 1fr;
-    border: solid white;
+    border: hkey white;
     content-align: center top;
     border-title-background: white 5%;
     border-title-style: underline;
@@ -50,14 +51,24 @@ Screen {
     color: red;
 }
 
+
 #service-status {
     column-span: 3;
-    row-span: 2;
+    height: 100%;
     background: black;
-    height: 1fr;
-    border: solid #003049;
+    border: tall white;
     content-align: center middle;
     margin: 1 0 0 0;
+}
+
+#service-status1 {
+    column-span: 3;
+    height: 100%;
+    row-span: 4;
+    background: black;
+    border: tall white;
+    content-align: center middle;
+    margin: 1 0 1 0;
 }
 
 #msc {
@@ -70,6 +81,7 @@ Screen {
     content-align: center middle;
     align: center middle;
     margin: 1 0 0 0;
+    visibility: visible;
 }
 
 #mscbox {
@@ -117,27 +129,26 @@ Header {
     height: 5;
     content-align: center middle;
     align: center middle;
-    border: round white;
-    background: black;
-    color: white;
+    border: heavy white;
+    color: black;
 }
 
 Header > HeaderClock {
-    color: royalblue;
+    color: white;
     text-style: bold;
     background: transparent;
-    border: round royalblue;
-    width: 20;
+    border: round white;
+    width: 12;
     align: center middle;
     content-align: center middle;
 }
 
 Header > HeaderTitle {
     color: white;
-    column-span: 1;
+    width: auto;
     text-style: bold;
-    background: transparent;
-    border: none red;
+    background: black;
+    border: hkey black;
     height: 3;
     align: center middle;
     content-align: center middle;
@@ -163,16 +174,16 @@ Horizontal {
     column-span: 3;
     width: 1fr;
     height: 1fr;
-    background: darkblue 10%;
-    border: solid #003049;
+    background: black;
+    border: heavy white;
     content-align: center middle;
     margin: 0;
     padding: 0;
 }
 
 #buttontabs {
-    border: none;
     dock: top;
+    border: none;
     height: 2;
     width: 100%;
     align-horizontal: center;
@@ -182,8 +193,11 @@ Horizontal {
 
 #tabs-list {
     dock: top;
-    color: black;
+    background: darkred;
+    border: none;
+
 }
+
 
 #buttontabs > Label {
     color: white;
@@ -196,7 +210,7 @@ Button {
     margin: 1 0 0 0;
     height: auto;
     box-sizing: border-box;
-    width: 20;
+    width: 28;
     border: solid black;
     padding: 0;
 }
@@ -399,7 +413,7 @@ ServiceStatusWidget > .datatable--cell {
 }
 
 ServiceStatusWidget > .datatable--hover {
-    background: $accent 50%;
+    background: $accent 20%;
 }
 
 DataTable.small-table {

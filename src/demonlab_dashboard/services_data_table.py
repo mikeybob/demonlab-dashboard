@@ -5,7 +5,7 @@ import subprocess
 from typing import List
 
 from textual.widget import Widget
-from textual.widgets import DataTable
+from textual.widgets import Collapsible, DataTable
 
 
 class ServiceStatusChecker:
@@ -61,9 +61,9 @@ class ServiceStatusWidget(Widget):
             "Additional Info",
         )
         self.table.zebra_styles = True
-        self.border_title = "Service Statuses [goldenrod]{hostname}[/goldenrod]".format(
-            hostname=hostname
-        )
+        self.border_title = "Service Statuses"
+        #    hostname=hostname
+        # )
         self.border_title_align = "left, center"
 
     def on_mount(self) -> None:
@@ -84,4 +84,5 @@ class ServiceStatusWidget(Widget):
 
     def compose(self):
         """Compose the widget with its table."""
-        yield self.table
+        with Collapsible(title=self.hostname):
+            yield self.table

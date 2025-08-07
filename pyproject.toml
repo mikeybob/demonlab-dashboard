@@ -1,6 +1,6 @@
 [project]
 name = "demonlab-dashboard"
-version = "0.1.0"
+version = "0.1.3"
 description = ""
 readme = "README.md"
 requires-python = ">=3.10"
@@ -19,7 +19,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy"
 ]
 dependencies = [
-  "textual==3.2.0",
+  "textual==3.3.0",
   "asyncio==3.4.3",
   "asyncpg==0.30.0",
   "datetime==5.5",
@@ -28,6 +28,11 @@ dependencies = [
   "textualeffects>=0.1.4",
   "terminaltexteffects>=0.12.0",
   "textual-pyfiglet>=0.6.0",
+  "psutil>=7.0.0",
+  "requests>=2.32.3",
+  "pillow>=11.2.1",
+  "textual-imageview>=0.1.1",
+  "pyfiglet>=1.0.2",
 ]
 
 [project.optional-dependencies]
@@ -38,7 +43,15 @@ dev = [
   "coverage",
   "textual-pyfiglet",
   "textual-dev",
-  "psycopg2-binary"
+  "psycopg2-binary",
+  "rich==14.0.0",
+  "textualeffects>=0.1.4",
+  "terminaltexteffects>=0.12.0",
+  "textual-pyfiglet>=0.6.0",
+  "psutil>=7.0.0",
+  "requests>=2.32.3",
+  "pillow>=11.2.1",
+  "textual-imageview>=0.1.1",
 ]
 
 [project.scripts]

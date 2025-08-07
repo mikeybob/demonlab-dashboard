@@ -1,7 +1,7 @@
 import asyncio
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from random import Random
 
 import button_action
@@ -28,6 +28,7 @@ from textual.widgets import (
     Rule,
     Sparkline,
     Static,
+    Tabs,
 )
 from textual_serve.server import Server
 
@@ -48,17 +49,48 @@ class GridLayoutTest(App):
     SUB_TITLE = "Synapse and Sysadmin"
 
     BINDINGS = [
-        Binding(key="q", action="quit", description="Quit the app"),
+        Binding(
+            key="q",
+            action="quit",
+            description="Quit app",
+            key_display="q",
+        ),
         Binding(
             key="FN1",
             action="help",
-            description="Show help screen",
+            description="Show help",
             key_display="Fn1",
         ),
-        Binding(key="b", action="null", description="Beep"),
-        Binding(key="p", action="null2", description="Plop"),
-        Binding(key="a", action="about", description="About"),
-        Binding(key="s", action="splashscreen", description="Splash"),
+        Binding(
+            key="g",
+            action="null",
+            description="Graphs",
+            key_display="g",
+        ),
+        Binding(
+            key="p",
+            action="null2",
+            description="Proxmox",
+            key_display="p",
+        ),
+        Binding(
+            key="a",
+            action="about",
+            description="About",
+            key_display="a",
+        ),
+        Binding(
+            key="s",
+            action="splashscreen",
+            description="Splash",
+            key_display="s",
+        ),
+        Binding(
+            key="r",
+            action="null3",
+            description="Refresh",
+            key_display="r",
+        ),
     ]
 
     # Traffic light icons for user state
@@ -279,54 +311,71 @@ class GridLayoutTest(App):
                 continue
             widget = self.user_widgets[user_id]
             info = self.user_data.get(user_id, {})
-            # Update icons and colors based on current state
+
+            # Icons
             state_icon = self.state_icons.get(info.get("state", "unknown"), "⚪")
             active_icon = (
-                " " if not info.get("currently_active") else "[#d7af00] [/#d7af00]"
+                "\uf007 "
+                if not info.get("currently_active")
+                else "[#d7af00]\uf0e7 [/#d7af00]"
             )
+
+            # Choose fade_color based on idle time
+            last_ts = info.get("last_active_ts", 0)
+            now_ts = datetime.now(timezone.utc).timestamp() * 1000
             fade_color = "#444444"
-            lgap_str = "N/A"
-            if info.get("last_active") not in (None, "N/A"):
-                try:
-                    last_active_time = datetime.fromisoformat(info["last_active"])
-                    if last_active_time.tzinfo is None:
-                        last_active_time = last_active_time.replace(tzinfo=timezone.utc)
-                    gap = datetime.now(timezone.utc) - last_active_time
-                    minutes_idle = gap.total_seconds() / 60
-                    if minutes_idle < 5:
-                        fade_color = "lime"
-                    elif minutes_idle < 15:
-                        fade_color = "#ffd700"
-                    elif minutes_idle < 30:
-                        fade_color = "royalblue"
-                    elif minutes_idle < 120:
-                        fade_color = "#888888"
-                    else:
-                        fade_color = "#444444"
-                    lgap_str = f"[firebrick]{gap.days}d[/] [royalblue]{gap.seconds//3600}h[/] [orangered]{gap.seconds//60%60}m[/]"
-                except Exception as e:
-                    logging.error(f"Error computing gap for {user_id}: {e}")
+            if last_ts and last_ts > 0:
+                age_ms = now_ts - last_ts
+                minutes_idle = age_ms / 1000 / 60
+                if minutes_idle < 5:
+                    fade_color = "lime"
+                elif minutes_idle < 10:
+                    fade_color = "darkgreen"
+                elif minutes_idle < 15:
+                    fade_color = "dodgerblue"
+                elif minutes_idle < 30:
+                    fade_color = "royalblue"
+                elif minutes_idle < 60:
+                    fade_color = "darkgoldenrod"
+                elif minutes_idle < 90:
+                    fade_color = "brown"
+                elif minutes_idle < 120:
+                    fade_color = "#888888"
+                else:
                     fade_color = "#444444"
-                    lgap_str = "Calc Error"
-            status_msg = info.get("status_msg", "N/A")
+
+            # Compute idle gap string
+            lgap_str = "N/A"
+            if last_ts and last_ts > 0:
+                delta = now_ts - last_ts
+                gap = timedelta(milliseconds=delta)
+                lgap_str = f"{gap.days}d {gap.seconds//3600}h {gap.seconds//60%60}m"
+
+            # Other metadata
             tz_label = info.get("timezone", "TZ")
-            last_active_label = info.get("last_active", "N/A")
+            status_msg = info.get("status_msg", "N/A")
+            last_active = info.get("last_active", "N/A")
+
+            # Rebuild the panel’s content as a simple string
             new_content = (
-                f"[#0A9396] : {last_active_label}[/#0A9396]\n"
-                f"[#3772FF bold] :[/] {lgap_str}\n"
-                f"[#800D80 bold] : {status_msg}[/#800D80 bold]\n"
+                f"[#0A9396]\uf11e : {last_active}[/#0A9396]\n"
+                f"[#3772FF bold]\uf2ab :[/] {lgap_str}\n"
+                f"[#800D80 bold]\uf25f : {status_msg}[/#800D80 bold]\n"
                 "\n"
-                f"   [#FFC300] [/#FFC300] {state_icon} "
-                f"[#4c3e93]  [/#4c3e93][#279af1]  [/#279af1]"
-                f"[#0ebd8c]  [/#0ebd8c][#ff006e]  [/#ff006e]  "
-                f"[#8BC34A]  [/#8BC34A]\n"
-                #    f"[link='{avatar_url}'][/link]"
+                f"   [#FFC300]\uf23e [/#FFC300] {state_icon} "
+                f"[#4c3e93]\uf408  [/#4c3e93][#279af1]\uf337  [/#279af1]"
+                f"[#0ebd8c]\uf41e  [/#0ebd8c][#ff006e]\uf0e7  [/#ff006e]\uf013  "
+                f"[#8BC34A]\uf0a3  [/#8BC34A]\n"
             )
+
+            # Update the border title & subtitle using fade_color
             widget.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
-            widget.border_subtitle = (
-                f"{tz_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
-            )
+            widget.border_subtitle = f"{last_active} {active_icon}[grey35]{info.get('display_name','')}[/grey35]"
+
+            # Push the new text into the widget
             widget.update(new_content)
+
+            # Finally, apply the colored border
             widget.border = ("heavy", fade_color)
 
     def compose(self) -> ComposeResult:
@@ -353,10 +402,16 @@ class GridLayoutTest(App):
                         minutes_idle = gap.total_seconds() / 60
                         if minutes_idle < 5:
                             fade_color = "lime"
-                        elif minutes_idle < 30:
-                            fade_color = "#ffd700"
+                        elif minutes_idle < 10:
+                            fade_color = "darkgreen"
+                        elif minutes_idle < 15:
+                            fade_color = "dodgerblue"
                         elif minutes_idle < 30:
                             fade_color = "royalblue"
+                        elif minutes_idle < 60:
+                            fade_color = "darkgoldenrod"
+                        elif minutes_idle < 90:
+                            fade_color = "brown"
                         elif minutes_idle < 120:
                             fade_color = "#888888"
                         else:
@@ -371,20 +426,19 @@ class GridLayoutTest(App):
                 status_msg = info.get("status_msg", "N/A")
                 tz_label = info.get("timezone", "TZ")
                 last_active_label = info["last_active"]
-                content = (
-                    f"[#0A9396] : {last_active_label}[/#0A9396]\n"
+                user_label = Static(
+                    f"[#0A9396]\uf11e : {last_active_label}[/#0A9396]\n"
                     f"[#0A9396]    {tz_label} [/#0A9396]\n"
-                    f"[#3772FF bold] : {lgap_str}[/#3772FF bold]\n"
-                    f"[#800D80 bold] : {status_msg}[/#800D80 bold]\n"
+                    f"[#3772FF bold]\uf2ab : {lgap_str}[/#3772FF bold]\n"
+                    f"[#800D80 bold]\uf25f : {status_msg}[/#800D80 bold]\n"
                     "\n"
-                    f"   [#FFC300] [/#FFC300] {state_icon} "
-                    f"[#4c3e93]  [/#4c3e93][#279af1]  [/#279af1]"
-                    f"[#0ebd8c]  [/#0ebd8c][#ff006e]  [/#ff006e]  "
-                    f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]"
-                    f"[#8BC34A]  [/#8BC34A][red][i] Avatar[/i][/red]",
-                    Digits(f"{index}", id=f"gap{index+1}"),
+                    f"   [#FFC300]\uf23e [/#FFC300] {state_icon} "
+                    f"[#4c3e93]\uf408  [/#4c3e93][#279af1]\uf337  [/#279af1]"
+                    f"[#0ebd8c]\uf41e  [/#0ebd8c][#ff006e]\uf0e7  [/#ff006e]\uf013  "
+                    f"[#8BC34A]\uf0a3  [/#8BC34A][red][i] Avatar[/i][/red]",
+                    id=f"User{index+1}",
+                    classes="box",
                 )
-                user_label = Label(content, id=f"User{index+1}", classes="box")
                 user_label.border_title = (
                     f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
                 )
@@ -403,7 +457,7 @@ class GridLayoutTest(App):
                         "",
                         id=f"User{index+1}",
                     ),
-                    LoadingIndicator(id="epty-loading-indicator"),
+                    LoadingIndicator(id=f"epty-loading-indicator{index+1}"),
                     Rule(),
                     classes="box empty_box",
                 )
@@ -424,12 +478,11 @@ class GridLayoutTest(App):
 
         # System misc. box
         yield Vertical(
-            Static("[center] [b]System Misc.[/b][/center]"),
-            Rule(),
+            Rule(id="mscruletop"),
             LoadingIndicator(id="loading-indicator"),
             LoadingIndicator(id="loading-indicator1"),
             LoadingIndicator(id="loading-indicator2"),
-            Rule(),
+            Rule(id="mscrulebot"),
             id="msc",
             classes="mscbox",
         )
@@ -451,25 +504,41 @@ class GridLayoutTest(App):
             hostname="pi0501",
             id="service-status",
         )
+
         # end on new panel code
 
         # Action buttons
         yield Horizontal(
-            Button("NUKE Resync", variant="warning", id="but01"),
-            Button("Scrub Stats", variant="warning", id="but02"),
-            Button("ssh FF1", variant="warning", id="but03"),
-            Button("ssh FN2", variant="warning", id="but04"),
-            Button("ssh rpi05", variant="warning", id="but05"),
-            Button("ssh ubu", variant="warning", id="but06"),
-            Button("Primary", variant="warning", id="but07"),
-            Button("Blowjob", variant="warning", id="but08"),
-            Button("Blowjob", variant="warning", id="but09"),
-            Button(" ☢ Full Stop  ☢", variant="warning", id="but10"),
+            Tabs("One", "Two", "Three", "Four", id="buttontabs"),
+            Button("RESYNC  ", variant="warning", id="but01"),
+            Button("FUNCTION", variant="warning", id="but02"),
+            Button("FUNCTION", variant="warning", id="but03"),
+            Button("FUNCTION", variant="warning", id="but04"),
+            Button("FUNCTION", variant="warning", id="but05"),
+            Button("FUNCTION", variant="warning", id="but06"),
+            Button("FUNCTION", variant="warning", id="but07"),
+            Button("RPTSCRUB", variant="warning", id="but08"),
+            Button("FUNCTION", variant="warning", id="but09"),
+            Button("SYNCTLop", variant="warning", id="but10"),
+        )
+
+        yield ServiceStatusWidget(
+            services=[
+                "sshd",
+                "nginx",
+                "postgresql",
+                "redis",
+                "synapse",
+                "maubot",
+            ],
+            username="mike",
+            hostname="dc-node-2",
+            id="service-status1",
         )
 
     async def on_mount(self):
         # Show splash screen initially, fade-in effect clearly working
-        await self.push_screen(SplashScreen())
+        # await self.push_screen(SplashScreen())
 
         # Start the background notification listener
         self.notifications_task = asyncio.create_task(self.listen_notifications())
@@ -477,25 +546,21 @@ class GridLayoutTest(App):
         # Start system health updater task
         asyncio.create_task(self.update_health())
 
-        # TODO: Resolve no show at startup.
+        # @TODO: Resolve splash no show at startup.
 
         # Short delay clearly visible, then remove splash screen automatically
 
         await asyncio.sleep(3)
 
-        await self.pop_screen()
+    # await self.pop_screen()
 
     async def update_health(self):
         """Periodically update General System Health panel with query results explicitly."""
-        while True:
-            label, next_datapoint = await asyncio.to_thread(
-                self.query_db_next_datapoint
-            )
 
+        while True:
+            value = await asyncio.to_thread(self.query_db_next_datapoint)
             gsh_widget = self.query_one("#gsh", Static)
-            gsh_widget.update(
-                f"[b]General System Health[/b]\n\n[green]{label}: {next_datapoint}[/green]"
-            )
+            gsh_widget.update(value)
 
             await asyncio.sleep(60)
 
@@ -523,30 +588,42 @@ class GridLayoutTest(App):
             if result and result[1]:
                 label, next_datapoint = result
                 next_dp_str = next_datapoint.strftime("%Y-%m-%d %H:%M:%S")
-                return label, next_dp_str
+                ## update entry in datatable.
+                return f"{label}: {next_dp_str}"
             else:
-                return "Next Datapoint", "N/A"
+                return "Next Datapoint: N/A"
         finally:
             cursor.close()
             conn.close()
 
     def action_null(self) -> None:
-        """No-op action for 'b' key (beep)."""
+        """ """
+        pass
         return
 
     def action_null2(self) -> None:
-        """No-op action for 'p' key (plop)."""
+        """ """
+        pass
+        return
+
+    def action_null3(self) -> None:
+        """ """
+        pass
         return
 
     def action_about(self) -> None:
-        """No-op action for 'a' key (about)."""
+        """Show screen action for 'a' key (about)."""
         self.push_screen(AboutScreen())
         return
 
     def action_splashscreen(self) -> None:
-        """No-op action for 's' key (splash)."""
-        self.push_screen(SplashScreen())
+        """Show screen action for 'r' key (refresh)."""
+        # self.push_screen(SplashScreen())
+        pass
         return
+
+
+# Main app entry point
 
 
 def main():

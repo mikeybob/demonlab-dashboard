@@ -52,7 +52,13 @@ class ServiceStatusWidget(Widget):
         self.table = DataTable()
         self.table.cursor_type = "row"
         self.table.add_columns(
-            "Service", "Status", "Host", "Last Checked", "Type", "Additional Info"
+            "Service",
+            "Status",
+            "Host",
+            "Last ✔",
+            "Next ✔",
+            "Type",
+            "Additional Info",
         )
         self.table.zebra_styles = True
 

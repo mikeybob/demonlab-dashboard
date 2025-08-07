@@ -32,3 +32,4 @@ src/demonlab_dashboard/temp/
 src/demonlab_dashboard.egg-info/
 
 build/lib
+dl_splash.py

@@ -52,7 +52,7 @@ class GridLayoutTest(App):
         Binding(
             key="q",
             action="quit",
-            description="Quit the app",
+            description="Quit app",
             key_display="q",
         ),
         Binding(
@@ -84,6 +84,12 @@ class GridLayoutTest(App):
             action="splashscreen",
             description="Splash",
             key_display="s",
+        ),
+        Binding(
+            key="r",
+            action="null3",
+            description="Refresh",
+            key_display="r",
         ),
     ]
 
@@ -364,7 +370,7 @@ class GridLayoutTest(App):
 
             # Update the border title & subtitle using fade_color
             widget.border_title = f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
-            widget.border_subtitle = f"{last_active} {active_icon}[grey35]{info.get('display_name','')}[/grey35]"
+            widget.border_subtitle = f"{tz_label} {active_icon}[grey35]{info.get('display_name','')}[/grey35]"
 
             # Push the new text into the widget
             widget.update(new_content)
@@ -396,10 +402,16 @@ class GridLayoutTest(App):
                         minutes_idle = gap.total_seconds() / 60
                         if minutes_idle < 5:
                             fade_color = "lime"
-                        elif minutes_idle < 30:
-                            fade_color = "#ffd700"
+                        elif minutes_idle < 10:
+                            fade_color = "darkgreen"
+                        elif minutes_idle < 15:
+                            fade_color = "dodgerblue"
                         elif minutes_idle < 30:
                             fade_color = "royalblue"
+                        elif minutes_idle < 60:
+                            fade_color = "darkgoldenrod"
+                        elif minutes_idle < 90:
+                            fade_color = "brown"
                         elif minutes_idle < 120:
                             fade_color = "#888888"
                         else:
@@ -431,7 +443,9 @@ class GridLayoutTest(App):
                     f"[bold {fade_color}]{user_id}[/bold {fade_color}]"
                 )
 
-                user_label.border_subtitle = f"{last_active_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
+                user_label.border_subtitle = (
+                    f"{tz_label} {active_icon}[grey35]{info['display_name']}[/grey35]"
+                )
 
                 user_label.border = ("heavy", fade_color)
                 self.user_widgets[user_id] = user_label
@@ -492,21 +506,36 @@ class GridLayoutTest(App):
             hostname="pi0501",
             id="service-status",
         )
+
         # end on new panel code
 
         # Action buttons
         yield Horizontal(
-            Tabs("One", "Two", "Three", "Four", id="buttontabs"),
-            Button("RESYNC  ", variant="warning", id="but01"),
-            Button("FUNCTION", variant="warning", id="but02"),
-            Button("FUNCTION", variant="warning", id="but03"),
-            Button("FUNCTION", variant="warning", id="but04"),
-            Button("FUNCTION", variant="warning", id="but05"),
-            Button("FUNCTION", variant="warning", id="but06"),
-            Button("FUNCTION", variant="warning", id="but07"),
-            Button("RPTSCRUB", variant="warning", id="but08"),
-            Button("FUNCTION", variant="warning", id="but09"),
-            Button("SYNCTLop", variant="warning", id="but10"),
+            Tabs("Synapse", "Linux", "Unifi", "Reports", id="buttontabs"),
+            Button("RESYNC  ", variant="primary", id="but01"),
+            Button("FUNCTION", variant="default", disabled=True, id="but02"),
+            Button("FUNCTION", variant="default", id="but03"),
+            Button("FUNCTION", variant="default", id="but04"),
+            Button("FUNCTION", variant="default", id="but05"),
+            Button("FUNCTION", variant="default", id="but06"),
+            Button("FUNCTION", variant="default", id="but07"),
+            Button("RPTSCRUB", variant="primary", id="but08"),
+            Button("FUNCTION", variant="warning", disabled=True, id="but09"),
+            Button("SYNCTLop", variant="success", id="but10"),
+        )
+
+        yield ServiceStatusWidget(
+            services=[
+                "sshd",
+                "nginx",
+                "postgresql",
+                "redis",
+                "synapse",
+                "maubot",
+            ],
+            username="mike",
+            hostname="dc-node-2",
+            id="service-status1",
         )
 
     async def on_mount(self):
@@ -561,6 +590,7 @@ class GridLayoutTest(App):
             if result and result[1]:
                 label, next_datapoint = result
                 next_dp_str = next_datapoint.strftime("%Y-%m-%d %H:%M:%S")
+                ## update entry in datatable.
                 return f"{label}: {next_dp_str}"
             else:
                 return "Next Datapoint: N/A"
@@ -578,13 +608,18 @@ class GridLayoutTest(App):
         pass
         return
 
+    def action_null3(self) -> None:
+        """ """
+        pass
+        return
+
     def action_about(self) -> None:
         """Show screen action for 'a' key (about)."""
         self.push_screen(AboutScreen())
         return
 
     def action_splashscreen(self) -> None:
-        """Show screen action for 's' key (splash)."""
+        """Show screen action for 'r' key (refresh)."""
         # self.push_screen(SplashScreen())
         pass
         return
