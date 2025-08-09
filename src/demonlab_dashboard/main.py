@@ -79,12 +79,6 @@ class GridLayoutTest(App):
             description="About",
             key_display="a",
         ),
-        Binding(
-            key="s",
-            action="splashscreen",
-            description="Splash",
-            key_display="s",
-        ),
     ]
 
     # Traffic light icons for user state
@@ -509,9 +503,11 @@ class GridLayoutTest(App):
             Button("SYNCTLop", variant="warning", id="but10"),
         )
 
-    async def on_mount(self):
-        # Show splash screen initially, fade-in effect clearly working
-        # await self.push_screen(SplashScreen())
+    async def on_mount(self) -> None:
+        """Display the splash screen briefly then start background tasks."""
+
+        # Show splash screen initially
+        await self.push_screen(SplashScreen())
 
         # Start the background notification listener
         self.notifications_task = asyncio.create_task(self.listen_notifications())
@@ -519,13 +515,13 @@ class GridLayoutTest(App):
         # Start system health updater task
         asyncio.create_task(self.update_health())
 
-        # @TODO: Resolve splash no show at startup.
+        # Hide the splash screen without blocking the UI
+        asyncio.create_task(self._auto_close_splash())
 
-        # Short delay clearly visible, then remove splash screen automatically
-
+    async def _auto_close_splash(self) -> None:
+        """Remove the splash screen after a brief delay."""
         await asyncio.sleep(3)
-
-    # await self.pop_screen()
+        await self.pop_screen()
 
     async def update_health(self):
         """Periodically update General System Health panel with query results explicitly."""
@@ -582,13 +578,6 @@ class GridLayoutTest(App):
         """Show screen action for 'a' key (about)."""
         self.push_screen(AboutScreen())
         return
-
-    def action_splashscreen(self) -> None:
-        """Show screen action for 's' key (splash)."""
-        # self.push_screen(SplashScreen())
-        pass
-        return
-
 
 # Main app entry point
 
